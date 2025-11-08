@@ -1,0 +1,1034 @@
+\documentclass{beamer}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{csquotes}
+\usepackage[style=authoryear,citestyle=authoryear-comp,backend=biber]{biblatex}
+\addbibresource{references.bib}
+\usepackage{hyperref}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,calc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{pgfgantt}
+\usepackage{pgf-umlsd}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{listings}
+\usepackage{appendixnumberbeamer}
+\usepackage{xcolor}
+\usepackage[protrusion=true,expansion=true]{microtype}
+\usepackage{etoolbox}
+\makeatletter
+\let\origframe\frame
+\let\endorigframe\endframe
+\renewenvironment{frame}[1][]{%
+  \origframe[t,allowframebreaks,#1]%
+}{%
+  \endorigframe
+}
+\makeatother
+
+\usetheme{Boadilla}
+\usecolortheme{default}
+
+\hypersetup{
+  pdftitle={Communication externe.},
+  pdfauthor={HANFAOUI Karim, KAFIF Imane, MAHFOUF Ilyas},
+  unicode=true,
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue,
+  citecolor=blue
+}
+
+\tikzstyle{actor} = [draw, ellipse, minimum height=1.5em, minimum width=3em, align=center]
+\tikzstyle{usecase} = [draw, ellipse, minimum height=2.5em, text centered]
+
+\lstset{basicstyle=\ttfamily\footnotesize, breaklines=true}
+
+\title[Presentation]{Communication externe.}
+\subtitle{bla, bla, bla....}
+\author[Karim, Imane et Ilyas]{HANFAOUI Karim\inst{1} \and KAFIF. Imane\inst{2} \and MAHFOUF. Ilyas\inst{3}}
+\institute[EMSI]{
+  \inst{1} EMSI, 4ème Année INFO G9 - \\
+  Karim.Hanfaoui@emsi-edu.ma \\
+  \inst{2} EMSI, 4ème Année INFO G9 - \\
+  Imane.Kafif@emsi-edu.ma \\
+  \inst{3} EMSI, 4ème Année INFO G9 - \\
+  Ilyas.Mahfouf@emsi-edu.ma
+}
+\date[OCT 2025]{EMSI Les Orangers, October 2025}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+    \titlepage
+    % Logo at the top-right of the title slide
+    \begin{textblock*}{2cm}(\dimexpr\paperwidth-3cm-0.6cm\relax,0.5cm)
+        \includegraphics[height=0.7cm]{logo.png}
+    \end{textblock*}
+    \note{Bienvenue dans ce cours de Communication Externe à destination des étudiants de 4e année en informatique. Nous allons aborder les concepts, stratégies et outils de la communication externe d’entreprise, avec un focus sur leur application dans le domaine des technologies de l’information.}
+\end{frame}
+
+% Objectives, prerequisites, evaluation
+\begin{frame}{Objectifs pédagogiques et organisation}
+    \textbf{Objectifs du cours:}
+    \begin{itemize}
+        \item Comprendre les stratégies de communication externe et leurs objectifs (image, réputation, valeur ajoutée).
+        \item Savoir élaborer un plan de communication externe aligné avec la stratégie de l’entreprise et les enjeux IT.
+        \item Maîtriser les outils des relations publiques, du marketing et de la communication de crise dans un contexte technologique.
+        \item Être capable d’évaluer l’efficacité des actions de communication (KPIs, ROI, cadre AMEC).
+    \end{itemize}
+    \vspace{0.5em}
+    \textbf{Prérequis:} Notions de base en marketing, culture d’entreprise, expérience de projets informatiques (DevOps, SRE) utile.
+    \vspace{0.5em}
+    \textbf{Modalités d’évaluation:} Contrôle continu (exercices appliqués, études de cas), projet final (dossier et soutenance), participation (ateliers en classe).
+    \note{Sur cette diapositive, nous décrivons les objectifs pédagogiques du cours, les connaissances préalables attendues et la façon dont le cours sera évalué. L’objectif est de situer le cadre: en fin de module, vous devrez être capables de concevoir et mettre en œuvre une stratégie de communication externe, en particulier dans un contexte d’ingénierie informatique. Les prérequis incluent des notions de marketing et une certaine familiarité avec le fonctionnement d’une entreprise tech. L’évaluation se fera via des exercices pratiques, un projet final de communication externe, et votre participation active aux ateliers.}
+\end{frame}
+
+% Table of contents
+\begin{frame}{Plan du cours}
+    \tableofcontents
+    \note{Voici le plan général du cours. Nous débuterons par les fondamentaux de la communication externe et le mapping des parties prenantes, puis nous aborderons la planification stratégique. Ensuite, nous explorerons successivement les relations publiques, le marketing et le branding, la communication numérique, la mesure de l’efficacité, la communication de crise, puis les enjeux de réputation et d’éthique. Des études de cas réels viendront illustrer ces concepts. Enfin, des ateliers pratiques et un projet final vous permettront d’appliquer ces connaissances.}
+\end{frame}
+
+\section{Introduction à la communication externe}
+\begin{frame}{Qu’est-ce que la communication externe ?}
+    \textbf{Définition :} La \textbf{communication externe} regroupe toutes les formes de communication d’une organisation vers l’extérieur (clients, partenaires, médias, acteurs publics, etc.). Son but est de:
+    \begin{itemize}
+        \item \textbf{Façonner l’image} de l’entreprise et la rendre reconnaissable.
+        \item \textbf{S’insérer dans son environnement} et légitimer ses activités.
+        \item \textbf{Prévenir ou minimiser les crises potentielles} qui pourraient affecter l’organisation.
+    \end{itemize}
+    \textbf{Enjeux :} La communication externe vise à bâtir une \textbf{réputation positive} et la confiance des publics externes pour soutenir les ventes, l’attractivité employeur et la crédibilité globale de l’entreprise.
+    \note{La communication externe correspond à tout ce qu’une entreprise communique à destination de publics extérieurs. Cela inclut les clients, prospects, partenaires, médias, autorités, communauté locale, etc. D’après la définition présentée, son rôle est de favoriser l’intégration de l’entreprise dans son écosystème, de justifier ses activités et de bâtir une image favorable. En d’autres termes, une bonne communication externe aide à établir et maintenir la confiance de tous ceux qui interagissent avec l’entreprise de l’extérieur. C’est particulièrement crucial pour les entreprises technologiques, où la confiance dans la fiabilité et l’éthique peut conditionner le succès commercial. On souligne aussi qu’une communication externe cohérente contribue à prévenir ou atténuer les crises : par exemple, si l’entreprise est transparente et entretient de bonnes relations avec ses publics, elle sera mieux armée en cas d’incident.}
+\end{frame}
+
+\begin{frame}{Parties prenantes et audiences cibles}
+    \textbf{Parties prenantes externes :} clients, utilisateurs, prospects, actionnaires, partenaires, fournisseurs, médias, régulateurs, communauté locale, ONG, etc. Chaque public a des attentes et des influences différentes.
+    \begin{itemize}
+        \item Ex.: \textit{Clients} cherchent la fiabilité du produit, \textit{médias} cherchent de l’information pertinente, \textit{régulateurs} attendent la conformité.
+    \end{itemize}
+    \textbf{Segmentation et personas :} Pour communiquer efficacement, on segmente les audiences et on crée des \textit{personas} (profils types représentant chaque segment) afin d’adapter les messages.
+    \begin{itemize}
+        \item Identifier les besoins, motivations et canaux préférés de chaque persona (ex.: le “CTO client” vs. le “grand public” auront des attentes de communication différentes).
+    \end{itemize}
+    \textbf{Mapping d’audience :} Outil visuel pour cartographier les parties prenantes selon leur influence et intérêt (matrice pouvoir/intérêt). Il aide à prioriser les efforts de communication sur les publics clés.
+    \note{Cette diapo traite de l’identification des publics externes de l’entreprise. Une entreprise doit connaître ses différentes parties prenantes et adapter son discours à chacune. Par exemple, les clients finaux n’ont pas les mêmes préoccupations que les investisseurs ou les journalistes. En marketing et communication, on utilise la segmentation et la construction de personas : ce sont des personnages fictifs mais réalistes qui représentent un groupe cible (par exemple “Alice, DSI d’une PME, 45 ans, qui attend de la sécurité et du support technique d’un fournisseur cloud”). Cela permet de personnaliser le ton et le contenu du message. On mentionne aussi le mapping des parties prenantes : on évalue sur un diagramme qui a du pouvoir ou de l’intérêt vis-à-vis de l’entreprise pour savoir qui adresser en priorité.}
+\end{frame}
+
+\begin{frame}{Messages clés et proposition de valeur}
+    \textbf{Messages clés :} Ce sont les messages principaux qu’une organisation veut absolument faire passer à toutes ses audiences. Ils doivent:
+    \begin{itemize}
+        \item \textbf{Refléter la proposition de valeur} unique de l’entreprise.
+        \item Être \textbf{clairs, concis et cohérents} sur l’ensemble des canaux.
+        \item Être mémorables et différenciants (ce qui fait la singularité de l’entreprise).
+    \end{itemize}
+    \textbf{Proposition de valeur :} l’offre de l’entreprise expliquée simplement – quelle valeur ajoutée pour le client ou la société ? Les messages clés traduisent cette proposition de valeur en bénéfices compréhensibles pour chaque public.
+    \begin{itemize}
+        \item Ex.: une startup cloud pourra marteler “Sécurité et disponibilité de vos données 24/7” pour rassurer ses clients, ce qui reflète sa valeur.
+    \end{itemize}
+    \textbf{Alignement mission/vision :} Les messages clés doivent également s’aligner sur la \textit{mission} (raison d’être) et la \textit{vision} (ambition long terme) de l’entreprise, pour donner du sens et de la consistance.
+    \note{Les messages clés sont le socle de toute communication externe. Ce sont quelques phrases ou idées-forces que l’on veut que nos publics retiennent absolument de nous. Par exemple, un message clé d’une entreprise de cybersécurité pourrait être “Nous protégeons vos données contre les menaces de demain”. Il faut toujours revenir à ces messages dans les supports (site web, communiqués, événements) afin de bâtir une image cohérente. Ils doivent bien entendu refléter la proposition de valeur réelle de l’entreprise – autrement dit, ce qui vous distingue et apporte quelque chose aux clients. Enfin, ces messages ne sortent pas de nulle part : ils sont liés à la mission de l’entreprise (pourquoi on existe) et à sa vision (où on veut aller).}
+\end{frame}
+
+\begin{frame}{Identité d’entreprise et image perçue}
+    \textbf{Identité visuelle :} Logo, charte graphique, couleurs, typographie, design produit… tout ce qui est vu de l’extérieur. L’identité visuelle doit exprimer la \textbf{personnalité} de l’entreprise et être utilisée de manière cohérente.
+    \begin{itemize}
+        \item Ex.: Un nouveau logo doit être décliné sur tous les supports (site, applications, documents) pour renforcer la reconnaissance.
+    \end{itemize}
+    \textbf{Ton de voix :} Style et ton des communications verbales ou écrites. Correspond aux valeurs de l’entreprise (ex.: ton pédagogue et accessible vs. ton expert technique pointu).
+    \begin{itemize}
+        \item Cohérence ton de voix sur réseaux sociaux, blog, relations presse, etc.
+    \end{itemize}
+    \textbf{Image et réputation :} L’\textit{image} est la représentation perçue par les publics, qui se construit au fil du temps par les actions de communication et l’expérience réelle vécue. L’objectif est que l’image perçue corresponde à l’identité voulue.
+    \begin{itemize}
+        \item L’image se mesure par ex. via la \textit{notoriété} (assistée/spontanée) et la \textit{perception qualitative} de l’entreprise.
+    \end{itemize}
+    \note{On aborde ici l’importance de l’identité de l’entreprise dans sa communication externe. L’identité visuelle (logo, couleurs, etc.) est la partie émergée de l’iceberg qui permet au public de reconnaître immédiatement la marque. Cette identité doit être pensée pour refléter ce qu’est l’entreprise (par ex., une fintech choisira peut-être un design moderne et épuré pour signifier l’innovation et la simplicité). Au-delà du visuel, le ton de voix – c’est-à-dire la manière dont l’entreprise s’adresse aux gens – est tout aussi crucial. Est-ce qu’on tutoie ou vouvoie ? Est-ce qu’on utilise de l’humour, un style technique, un style inspirant ? Ce ton doit être cohérent avec les valeurs. L’image, c’est ce que les publics pensent et ressentent à propos de l’entreprise. Elle peut être positive ou négative, et ne se bâtit pas en un jour. D’où la nécessité de maintenir une cohérence entre ce qu’on dit (notre identité projetée) et ce qu’on fait (les produits, le service client, etc.). On rappelle qu’on peut suivre la notoriété (le fait que les gens connaissent la marque) en notoriété assistée ou spontanée, et suivre l’image via des enquêtes qualitatives.}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 1)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item La communication externe vise à bâtir une réputation positive et cohérente de l’entreprise auprès de tous les publics externes.
+        \item Il est essentiel d’identifier les parties prenantes clés et d’adapter les messages à chaque audience (via des personas et un mapping des parties prenantes).
+        \item Des \textbf{messages clés clairs} et alignés sur la proposition de valeur, la mission et la vision de l’entreprise, servent de fil rouge à toute la communication.
+        \item L’identité visuelle et le ton de voix sont des outils stratégiques : ils doivent exprimer la personnalité de l’entreprise et être appliqués uniformément sur tous les supports.
+        \item L’image perçue (réputation) est le résultat cumulatif des communications et des expériences réelles : attention à la cohérence entre ce qu’on dit et ce qu’on fait.
+    \end{itemize}
+    \end{block}
+    \note{Pour l’ingénieur en informatique, retenir que la communication externe n’est pas qu’une affaire de “commerciaux” ou de “marketeurs” : même les aspects techniques (sécurité, fiabilité) doivent être communiqués aux clients et aux partenaires. Vous serez peut-être amenés à expliquer des choix techniques à des non-techniques, ou à contribuer à l’image de votre entreprise en tant qu’experts (par exemple via des articles de blog ou des conférences). Comprendre la logique des messages clés et de l’identité de marque vous aidera à aligner votre discours technique avec la stratégie globale de l’entreprise.}
+\end{frame}
+
+\section{Stratégie \& planification de la communication}
+\begin{frame}{Diagnostiquer avant de communiquer}
+    \textbf{Audit de communication :} Avant d’établir un plan, on réalise un diagnostic de la situation actuelle:
+    \begin{itemize}
+        \item \textbf{Image et notoriété :} Quelle est l’image actuelle de l’entreprise ? Mesures de notoriété, sondages d’opinion, e-réputation en ligne.
+        \item \textbf{Analyse interne :} Forces et faiblesses en communication (messages actuels, compétences, supports disponibles).
+        \item \textbf{Analyse externe :} Opportunités et menaces dans l’environnement (concurrence, tendances marché, contexte réglementaire).
+    \end{itemize}
+    \textbf{Outils d’analyse stratégique :}
+    \begin{itemize}
+        \item \textbf{SWOT :} Cartographie des \underline{forces}, \underline{faiblesses}, \underline{opportunités}, \underline{menaces} liés à la communication et à l’entreprise.
+        \item \textbf{PESTEL :} Analyse macro des facteurs \underline{P}olitiques, \underline{É}conomiques, \underline{S}ociaux, \underline{T}echniques, \underline{É}cologiques, \underline{L}égaux influençant la communication (ex.: nouvelles lois RGPD, nouvelles techno IA, etc.).
+        \item \textbf{Audit d’image :} Études qualitatives (focus groupes, interviews) et quantitatives (surveys) pour comprendre comment l’entreprise est perçue.
+    \end{itemize}
+    \note{Toute bonne stratégie de communication commence par un état des lieux. Un ingénieur peut assimiler cela à la phase de “recherche de bugs” ou d’analyse des besoins d’un projet. On identifie ce qui marche ou ne marche pas dans la communication actuelle. Le SWOT aide à synthétiser les forces et faiblesses internes (ex.: une forte expertise technique du personnel est une force, un manque de présence sur les réseaux sociaux est une faiblesse) et les opportunités/menaces externes (ex.: opportunité = une nouvelle norme pro-climat permet de valoriser nos efforts RSE; menace = un concurrent commence à occuper beaucoup l’espace médiatique). PESTEL est un rappel de considérer tous les facteurs macro (lois, tendances socio-culturelles, etc.). L’audit de réputation peut impliquer de lire ce qui se dit en ligne sur l’entreprise, de sonder les clients sur leur satisfaction, etc. Cette base analytique justifiera les choix d’objectifs et d’actions du plan de communication.}
+\end{frame}
+
+\begin{frame}{Fixer des objectifs SMART alignés business}
+    \textbf{Objectifs de communication :} Doivent découler des objectifs business/stratégiques de l’entreprise (supporter les ventes, accroître la notoriété, améliorer l’image sur un critère, etc.). Ils sont idéalement \textbf{SMART}:
+    \begin{itemize}
+        \item \textbf{Spécifiques :} ciblés sur un aspect précis (ex: “augmenter la notoriété spontanée de la marque chez les développeurs”).
+        \item \textbf{Mesurables :} avec un indicateur quantifiable (ex: notoriété spontanée de 20\% à 30\%).
+        \item \textbf{Atteignables :} ambitieux mais réalistes selon les ressources.
+        \item \textbf{Pertinents :} en lien direct avec la stratégie (ex: si l’entreprise vise le marché des développeurs, l’objectif de notoriété sur ce public est pertinent).
+        \item \textbf{Temporellement définis :} avec une échéance (ex: “d’ici 12 mois”).
+    \end{itemize}
+    \textbf{Alignement business-IT :} Dans une entreprise tech, la communication externe doit valoriser les réussites techniques (innovation, fiabilité) qui soutiennent le business. Le plan de com’ se coordonne avec les feuilles de route produit/IT.
+    \begin{itemize}
+        \item Ex: objectif business = gagner 10\% de parts de marché cloud en Europe; traduction comm = campagnes de notoriété et de crédibilité technique sur le cloud en Europe.
+    \end{itemize}
+    \note{Après le diagnostic, on définit où on veut aller. Les objectifs SMART sont un classique du management, applicable à la communication. Par exemple, il ne suffit pas de dire “on veut plus de visibilité”, il faut préciser combien, sur quel public et dans quel délai, et pouvoir mesurer. Cela permet ensuite de juger du succès. Un point clé pour des ingénieurs: l’alignement avec les objectifs métiers. Si l’entreprise veut lancer un nouveau produit, l’objectif communication pourrait être “faire connaître ce produit auprès de 50 pourcent de la cible X dans les 6 mois”. Une communication bien alignée fait aussi le lien avec l’IT: si on met en avant la performance ou la sécurité comme argument de vente, il faut que les équipes techniques fournissent des données ou témoignages pour soutenir ces messages.}
+\end{frame}
+
+\begin{frame}{Choisir les canaux : le modèle P.E.S.O.}
+    \textbf{PESO :} Un moyen de classifier les canaux de communication:
+    \begin{itemize}
+        \item \textbf{Paid Media} (médias payés) : publicités, sponsoring, ads (ex: Google Ads, affichage, posts sponsorisés). Permet de toucher rapidement une audience large mais payant.
+        \item \textbf{Earned Media} (médias acquis) : retombées presse, articles, mentions obtenues grâce aux relations presse ou au bouche-à-oreille. Gage de crédibilité car tiers qui parlent de vous.
+        \item \textbf{Shared Media} (médias partagés) : réseaux sociaux et contenu partagé (utilisateurs qui repartagent, community management). Interaction directe, viralité potentielle.
+        \item \textbf{Owned Media} (médias possédés) : supports propres à l’entreprise (site web, blog, newsletter, événements propriétaires, livre blanc). Maîtrise totale du message.
+    \end{itemize}
+    \textbf{Approche intégrée :} Une stratégie efficace combine ces canaux pour maximiser l’impact:
+    \begin{itemize}
+        \item Ex.: Lancement d’un nouveau service = article de blog (owned) diffusé via Twitter/LinkedIn (shared), communiqué de presse aux médias tech (earned), et éventuellement campagne pub ciblée (paid).
+        \item L’intégration assure cohérence du message sur toutes les plateformes.
+    \end{itemize}
+    \note{Le modèle PESO est très utile pour les ingénieurs qui découvrent le monde de la communication, car il permet de structurer les types de supports. Paid = payant, Earned = qu’on a “gagné” par notre mérite (ex: un journaliste écrit un article car on a une actu intéressante), Shared = tout ce qui est sur les réseaux sociaux et potentiellement viral, Owned = nos canaux à nous. Aucun de ces canaux n’est magique seul : en combinant, on crée un écho. Par exemple, on annonce une nouveauté sur notre site (owned), on relaie sur Twitter (shared), ça attire l’attention d’un blog qui en parle (earned), et en plus on avait prévu un petit budget pub sur LinkedIn pour cibler certains professionnels (paid). Le plus important, c’est que toutes ces communications racontent la même histoire et se renforcent mutuellement. Pour l’ingénieur, c’est comparable à redonder une information sur plusieurs systèmes pour atteindre une fiabilité plus grande.}
+\end{frame}
+
+\begin{frame}{Plan de communication : de la stratégie à l’action}
+    \textbf{Contenu d’un plan de communication externe :}
+    \begin{enumerate}
+        \item \textbf{Contexte et diagnostic :} résumé du SWOT, des enjeux identifiés.
+        \item \textbf{Objectifs de communication :} explicités et quantifiés (SMART).
+        \item \textbf{Cibles :} listes des publics prioritaires (segments) et messages clés pour chacun.
+        \item \textbf{Stratégie et axes :} les grands axes narratifs ou créatifs (ex: “innovation durable” comme fil conducteur).
+        \item \textbf{Actions et canaux :} calendrier des actions prévues sur les différents canaux (plan éditorial).
+        \item \textbf{Ressources :} budget alloué, équipe responsable, outils nécessaires.
+        \item \textbf{Indicateurs de succès :} KPIs de suivi et modalités d’évaluation (tableau de bord).
+    \end{enumerate}
+    \textbf{Gouvernance :} Clarifier qui pilote la communication (par ex. le directeur comm), et le rôle de chaque partie:
+    \begin{itemize}
+        \item RACI matrix (\textit{Responsible, Accountable, Consulted, Informed}) pour chaque action. Ex: un ingénieur peut être “Consulted” pour un livre blanc technique, le marketing “Responsible” de sa rédaction, le DG “Accountable” (valide), l’équipe juridique “Informed”.
+    \end{itemize}
+    \textbf{Calendrier :} \textit{Roadmap} sur 6 mois, 12 mois, avec points clés (événements, lancements, saisons). Utilisation d’un calendrier éditorial pour planifier les publications régulières.
+    \note{Ici on décrit concrètement ce qu’est un plan de communication. C’est un document qui ressemble un peu à un cahier des charges et un planning à la fois. L’ingénieur peut voir cela comme un plan de projet pour la communication : on y trouve les objectifs, les livrables (messages, contenus), les échéances, les ressources. On mentionne la matrice RACI, qui est un outil souvent utilisé en gestion de projet pour clarifier les responsabilités. C’est utile car la communication externe implique souvent plusieurs départements (ex: la technique, le juridique, le marketing) – chacun doit savoir son rôle. Enfin, on insiste sur le calendrier : planifier sur l’année les moments où communiquer (sortie d’un produit en Q2, salon professionnel en Q3, etc.) afin d’anticiper la production de contenu. Pour un ingénieur, cela fait écho à une roadmap de développement logiciel, avec des releases à dates fixes.}
+\end{frame}
+
+\begin{frame}{Exemple de matrice RACI (extrait plan de com’)}
+    \centering
+    \begin{tabularx}{\textwidth}{X c c c c}
+        \toprule
+        \textbf{Action} & \textbf{Responsable (R)} & \textbf{Accountable (A)} & \textbf{Consulté (C)} & \textbf{Informé (I)} \\
+        \midrule
+        Rédiger communiqué lancement & Chargé PR & Dir. Com & Dir. Produit, Ingé Chef & DG, Équipe Sales \\
+        \midrule
+        Refonte site web carrière & RH Communication & Dir. RH & Développeur Web & Tout le personnel \\
+        \midrule
+        Webinar technique (sécurité) & Expert Sécurité & Dir. Tech (CTO) & Marketing Contenu & Clients inscrits \\
+        \bottomrule
+    \end{tabularx}
+    \vspace{0.5em}
+    {\footnotesize \textit{R} = qui réalise; \textit{A} = qui rend des comptes (valide); \textit{C} = dont l’avis est sollicité; \textit{I} = qui est tenu informé.}
+    \note{Ce tableau illustre comment on attribue les rôles. Par exemple, pour un communiqué de presse de lancement de produit : le chargé des relations presse est responsable de le rédiger (R), le directeur communication est celui qui doit en dernier ressort approuver (A). Le directeur de produit et un ingénieur chef de projet sont consultés (C) – on va leur demander de valider le contenu technique ou l’angle du communiqué. Enfin, le directeur général et l’équipe commerciale sont informés (I) de la diffusion du communiqué, car il est important qu’ils sachent qu’on a communiqué cette nouvelle afin de relayer ou de répondre aux questions. Cette grille évite les confusions et oublis. L’ingénieur peut s’attendre à figurer parfois en “Consulté” (par exemple pour vérifier une information technique dans un document) ou en “Informé” (par ex. informé qu’un événement presse a lieu sur son projet).}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 2)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Analyse préalable :} tout plan de communication débute par un audit (SWOT, PESTEL, audit d’image) pour cibler les enjeux et problèmes à résoudre.
+        \item \textbf{Objectifs SMART :} définir clairement des objectifs spécifiques, mesurables et alignés sur la stratégie business de l’entreprise.
+        \item \textbf{Choix des canaux :} utiliser une combinaison pertinente de médias payants, acquis, partagés et propres (modèle PESO) pour maximiser la portée et la crédibilité du message.
+        \item \textbf{Planification :} établir un plan d’actions calendrisé (calendrier éditorial) détaillant pour chaque action qui fait quoi (matrice RACI) et avec quels indicateurs de succès.
+        \item \textbf{Alignement et cohérence :} le plan de communication n’est pas isolé – il s’aligne aux lancements produits, aux objectifs de vente, aux contraintes légales (ex: RGPD) et implique diverses équipes (d’où l’importance de la gouvernance définie).
+    \end{itemize}
+    \end{block}
+    \note{Un ingénieur doit comprendre qu’une bonne communication externe se prépare un peu comme un projet technique : on recueille des données, on fixe des buts clairs, on choisit les outils/canaux adaptés, on planifie sur une timeline et on désigne les responsables. Ainsi, si un service R\&D prévoit de sortir une nouvelle API en septembre, il faut que la communication soit anticipée en amont (brochure technique, billet de blog, communiqué de presse, etc.). L’ingénieur gagne à participer à cette planification en partageant le calendrier des releases ou en signalant les moments forts techniques qui mériteraient un coup de projecteur.}
+\end{frame}
+
+\section{Relations Publiques (RP)}
+\begin{frame}{Relations presse et médias}
+    \textbf{Relations presse :} Ensemble des techniques pour nouer et entretenir des relations avec les journalistes et médias (presse écrite, radio, TV, web). Objectif : obtenir des \textbf{retombées médiatiques} positives (\textit{Earned Media}).
+    \begin{itemize}
+        \item \textbf{Communiqué de presse (CP) :} outil principal – annonce brève et formatée d’une actualité (lancement, partenariat, recrutement clé, résultats, etc.). Doit respecter un style journalistique et comporter les infos essentielles.
+        \item \textbf{Dossier de presse :} document plus long fourni lors de grandes annonces ou événements, contenant contexte, chiffres, citations, visuels.
+        \item \textbf{Conférence de presse :} événement organisé pour présenter une info majeure et répondre aux questions des médias.
+    \end{itemize}
+    \textbf{Stratégie médias :} Alignée sur les objectifs stratégiques de l’entreprise:
+    \begin{itemize}
+        \item Identifier les médias cibles pertinents (ex: presse informatique spécialisée pour une actu tech, grand public pour un sujet sociétal).
+        \item Construire des relations de confiance avec les journalistes (fiabilité des informations fournies, disponibilité pour les questions).
+        \item \textbf{Transparence et vérité :} un attaché de presse crédible doit fournir un discours honnête, sinon la relation avec les journalistes se détériore.
+    \end{itemize}
+    \note{Les relations presse sont un pilier classique des RP. On vise à obtenir des articles ou reportages sur l’entreprise sans payer la pub, mais parce que l’information est jugée intéressante par un média. Pour l’ingénieur, c’est utile de comprendre pourquoi parfois l’entreprise lui demande des chiffres ou des citations : souvent c’est pour alimenter un communiqué ou un dossier de presse. Par exemple, si l’entreprise a amélioré son algorithme et que ça double la vitesse du service, l’attaché de presse va vouloir un chiffre clair pour le mettre en avant dans le communiqué. On souligne ici que les journalistes sont un public exigeant : ils valorisent la transparence et sanctionneront toute exagération ou donnée fausse. D’où l’importance de bien vérifier les informations techniques que l’on communique.}
+\end{frame}
+
+\begin{frame}{Influenceurs, KOL et nouveaux relais}
+    \textbf{KOL (Key Opinion Leaders) / influenceurs :} Personnes non-journalistes mais qui possèdent une forte audience et crédibilité dans un domaine (blogueurs, YouTubeurs tech, experts sur LinkedIn, etc.).
+    \begin{itemize}
+        \item Ex. : un ingénieur célèbre qui tient un blog sur la cybersécurité peut être un relais d’opinion clé pour une entreprise de sécurité informatique.
+        \item \textbf{Stratégie d’influence :} identifier ces KOL et construire avec eux des partenariats (envoyer des informations en avant-première, proposer des tests produits, invitations à des événements). Cela doit se faire de manière éthique (transparence sur les partenariats rémunérés ou non).
+    \end{itemize}
+    \textbf{Leadership d’opinion de l’entreprise :} Positionner des dirigeants ou experts internes comme des références:
+    \begin{itemize}
+        \item \textit{Tribunes et blogs} signés par le CTO ou un expert dans la presse ou sur Medium.
+        \item \textit{Prises de parole en conférences} (renforcer la visibilité et l’autorité).
+        \item Objectif : crédibiliser l’entreprise comme leader sur ses sujets (ex: IA responsable, cybersécurité, Green IT…).
+    \end{itemize}
+    \textbf{Éthique et transparence :} \textit{Influence marketing} doit respecter des règles déontologiques (ex: mention “contenu sponsorisé” si un influenceur est rémunéré pour parler d’un produit). Les codes de conduite (ex: ARPP en France, directives PRSA) soulignent cette obligation de transparence pour préserver la confiance du public.
+    \note{Depuis quelques années, les influenceurs et leaders d’opinion en ligne ont pris une place majeure. Un article dans \emph{01net} ou \emph{Le Monde} a du poids, mais un test produit par un youtubeur suivi par 100k développeurs peut avoir autant (sinon plus) d’impact sur la perception. L’entreprise doit donc intégrer ces nouveaux relais. Pour un ingénieur, cela signifie que vous pourriez être amenés à fournir un support technique à un blogueur qui teste votre API, ou à écrire vous-même du contenu technique pour affirmer le leadership de votre entreprise. On rappelle le nécessaire cadre éthique : toute collaboration rémunérée avec un influenceur doit être signalée. Des organismes professionnels ont édicté ces règles (l’ARPP en France par exemple). L’authenticité est en jeu : un influenceur qui cacherait une pub risque de perdre en crédibilité, et l’entreprise aussi.}
+\end{frame}
+
+\begin{frame}{Mesurer les RP : de la couverture médiatique à l’impact}
+    \textbf{Couverture médiatique :} Indicateur de base – nombre d’articles, de citations, de partages obtenus grâce aux RP sur une période donnée.
+    \begin{itemize}
+        \item Outils : \textit{revue de presse} manuelle ou via un service de veille (mots-clés, alertes).
+        \item Metrics associés : \# d’articles positifs/neutres/négatifs, audience cumulée des médias couverts, équivalent publicitaire (AVE) – toutefois, l’AVE est critiqué et à éviter dans les standards actuels.
+    \end{itemize}
+    \textbf{Indice de réputation :} Certaines entreprises suivent un score global issu de sondages ou d’analyses (ex: score de réputation sur 100, classement dans un indice sectoriel). Ces indices prennent en compte la visibilité et la perception (confiance, admiration, etc.).
+    \begin{itemize}
+        \item Ex: Indice RepTrak, Edelman Trust Score, etc. \textit{Exemple :} en 2022, le secteur technologique affichait un taux de confiance de 74\%, bien supérieur aux réseaux sociaux à 44\%.
+    \end{itemize}
+    \textbf{Cadre AMEC pour évaluation :} On y reviendra en détail dans la section Mesure. Pour les RP, l’AMEC encourage à lier:
+    \begin{itemize}
+        \item \textit{Outputs} (ex: nombre d’articles),
+        \item \textit{Outtakes} (ce que l’audience a retenu : ton des articles, messages clés présents?),
+        \item \textit{Outcomes} (effets sur l’attitude ou le comportement : augmentation des visites sur le site après une couverture médiatique).
+    \end{itemize}
+    \note{Mesurer l’efficacité des RP est notoiremment difficile mais nécessaire. On parle plus en détail d’AMEC plus tard, mais ici on plante le décor : il ne suffit pas de compter les articles (outputs), il faut voir si ces articles contiennent nos messages clés et comment ils nous présentent (c’est l’outtake, la qualité de la couverture), et idéalement voir si cela change quelque chose (outcome) – par exemple, après une campagne de RP, note-t-on plus de demandes entrantes, une meilleure opinion chez la cible? L’exemple chiffré sur la confiance est tiré de l’Edelman Trust Barometer, qui est un baromètre annuel sur la confiance dans les institutions et secteurs. On voit que globalement la tech est un secteur plutôt bien perçu (avant les controverses en tout cas), comparé aux médias sociaux ou à d’autres industries. Un tel résultat influence la façon de communiquer : un secteur très peu trusted doit d’autant plus travailler sa pédagogie et la transparence.}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 3)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Médias et journalistes :} Les RP visent à obtenir des retombées dans les médias. Il faut fournir aux journalistes des informations exactes, claires et intéressantes (communiqués, interviews), en respectant la \textbf{transparence} et l’honnêteté.
+        \item \textbf{Nouveaux influenceurs :} Au-delà de la presse traditionnelle, les experts en ligne et influenceurs sont des relais importants. Une entreprise tech gagne à impliquer des KOL (Key Opinion Leaders) dans sa communication, tout en respectant une éthique de collaboration (pas de dissimulation de partenariats).
+        \item \textbf{Porter la voix technique :} Les ingénieurs et dirigeants techniques peuvent être mis en avant comme leaders d’opinion (prises de parole en conférences, articles signés). Cela renforce la crédibilité auprès des pairs.
+        \item \textbf{Outils de RP :} Savoir ce qu’est un communiqué de presse, un dossier de presse, une conférence de presse – et en tant qu’ingénieur, pouvoir contribuer au contenu technique de ces supports en vulgarisant ses sujets.
+        \item \textbf{Évaluation :} Les métriques RP dépassent le simple comptage d’articles : on cherche à savoir si les messages clés sont repris et si l’image ou la notoriété évoluent suite aux campagnes (via des enquêtes ou des indices de réputation).
+    \end{itemize}
+    \end{block}
+    \note{Pour l’ingénieur, l’enjeu est de comprendre le rôle qu’il peut jouer dans les relations publiques de l’entreprise. Par exemple, on pourrait vous demander d’expliquer un concept technique à un journaliste ou de participer à un webinar public. Avoir conscience des principes de base (ne pas divulguer d’infos non validées, rester clair, éviter le jargon non expliqué, etc.) vous aidera à bien représenter votre organisation. Retenez aussi que la crédibilité technique de l’entreprise peut être un axe fort de communication – et vous, ingénieurs, en êtes les ambassadeurs naturels.}
+\end{frame}
+
+\section{Marketing \& branding}
+\begin{frame}{Marque et plateforme de marque}
+    \textbf{Marque :} Bien plus que le logo, c’est l’\textbf{identité globale} de l’entreprise telle qu’aperçue par le public. Inclut la mission, les valeurs, la personnalité.
+    \begin{itemize}
+        \item \textbf{Plateforme de marque :} document stratégique qui formalise : la vision, la mission, les valeurs clés, le positionnement (comment on se différencie), la promesse (ce qu’on apporte au client) et la preuve (pourquoi on peut le promettre).
+        \item Ex: pour une entreprise SaaS DevOps, plateforme de marque pourrait définir la mission “accélérer le cycle de vie logiciel de nos clients”, valeurs “innovation, fiabilité, communauté”, positionnement “leader CI/CD open-source”.
+    \end{itemize}
+    \textbf{Identité visuelle :} (reprise de section 1) élément du branding - cohérence graphique sur tous supports.
+    \begin{itemize}
+        \item Inclut charte graphique, logos secondaires, style d’iconographie, design des documents, etc.
+    \end{itemize}
+    \textbf{Ton de voix \& storytelling :} Le branding intègre la \textit{façon de raconter} l’histoire de la marque. Storytelling = construire un récit autour de la marque (origines, défis surmontés, vision du futur) pour créer de l’émotion et de l’attachement.
+    \begin{itemize}
+        \item Ex: une startup peut brander l’histoire de ses fondateurs dans un garage comme symbole d’innovation et de proximité.
+    \end{itemize}
+    \note{Le concept de marque est fondamental en marketing. On pourrait dire que c’est la “personnalité” de l’entreprise. La plateforme de marque sert de référence interne pour que tout le monde communique de façon cohérente. Par exemple, si une valeur de la marque est la “transparence”, on s’efforcera d’être transparent dans nos communications, notre support client, etc. Pour un ingénieur, comprendre la plateforme de marque peut orienter la façon dont on parle de son travail : par exemple, si la promesse de marque est “simplifier la vie des développeurs”, un ingénieur évangéliste mettra l’accent dans ses présentations sur la simplicité d’utilisation de l’outil. Le storytelling, quant à lui, transforme la communication en récit. Plutôt que de lister des features, on raconte comment l’idée est née d’un problème réel, comment l’équipe l’a résolu avec passion, etc. Cela touche plus le public qu’un simple argumentaire froid.}
+\end{frame}
+
+\begin{frame}{Content marketing : contenu utile pour attirer}
+    \textbf{Content marketing :} stratégie qui consiste à créer et diffuser des contenus informatifs ou divertissants apportant de la valeur au public, dans le but d’attirer et d’engager celui-ci (plutôt que de le solliciter par de la pub intrusive).
+    \begin{itemize}
+        \item Formats : articles de blog, infographies, vidéos explicatives, livres blancs, études de cas, podcasts, newsletters.
+        \item Ex: une entreprise cloud propose un livre blanc “Guide de la migration vers le cloud en 10 étapes” - cela attire les prospects intéressés par la thématique, tout en positionnant l’entreprise comme experte.
+    \end{itemize}
+    \textbf{SEO/SEA (haut niveau) :}
+    \begin{itemize}
+        \item \textbf{SEO (Search Engine Optimization) :} optimiser le contenu (mots-clés, structure, technique) pour remonter dans les résultats naturels de Google. Le content marketing bien fait améliore le SEO en fournissant du contenu riche que Google valorise.
+        \item \textbf{SEA (Search Engine Advertising) :} publicité sur les moteurs de recherche (ex: Google Ads). On paie pour apparaître en tête sur certains mots-clés. Nécessite de choisir les bons mots-clés (ceux que la cible recherche).
+    \end{itemize}
+    \textbf{Emailing \& nurturing :} l’email reste un canal fort de marketing direct.
+    \begin{itemize}
+        \item Exemple : une newsletter mensuelle technique envoyée aux clients/dev intéressés, apportant astuces et actualités, permet de maintenir l’engagement.
+        \item \textit{Lead nurturing} : envoi de contenus progressifs (automatisation marketing) pour accompagner un prospect dans sa réflexion d’achat (ex: suite d’e-mails didactiques après inscription à un essai gratuit).
+    \end{itemize}
+    \note{Le marketing de contenu est très pertinent pour les entreprises tech, car les audiences (développeurs, décideurs IT) sont friandes d’informations utiles et creusées. Un blog technique bien alimenté peut devenir une référence et attirer naturellement du trafic (SEO). Il permet aussi de nourrir les réseaux sociaux, les newsletters, etc. L’e-mailing, malgré son ancienneté, reste efficace si on apporte de la valeur et qu’on respecte les consentements (RGPD oblige). Un point technique sur SEO/SEA : un ingénieur peut contribuer en veillant à la performance du site (critère SEO) et en comprenant que choisir les bons mots-clés c’est comme optimiser une requête en base – il faut se mettre à la place de l’utilisateur final et parler son langage.}
+\end{frame}
+
+\begin{frame}{Événementiel et marketing direct}
+    \textbf{Événements :} Rencontres en personne ou virtuelles visant à promouvoir la marque et échanger avec les publics:
+    \begin{itemize}
+        \item \textbf{Salons professionnels / conférences :} stands, démonstrations. Permet de rencontrer clients et presse. Ex: participation au \textit{CES}, au \textit{VivaTech}.
+        \item \textbf{Webinars / événements en ligne :} sessions live sur un sujet d’expertise (ex: “Tech Talk sur Kubernetes”). Génère des leads qualifiés (participants intéressés).
+        \item \textbf{Événements propriétaires :} l’entreprise organise sa propre conférence utilisateur (ex: \textit{“DevFest by CompanyX”}). Renforce la communauté et la fidélisation.
+    \end{itemize}
+    \textbf{Marketing direct (hors numérique) :}
+    \begin{itemize}
+        \item \textbf{Envois postaux ciblés :} dans certains contextes B2B, envoyer un kit ou un courrier personnalisé peut marquer les esprits (ex: envoi d’une carte microSD brandée aux DSI pour promouvoir un service IoT).
+        \item \textbf{Cadeaux d’affaires / goodies :} stylos, t-shirts, gadgets tech logotypés remis lors d’événements ou par courrier – pour laisser une empreinte tangible de la marque.
+        \item \textbf{Parrainage (sponsoring) :} associer la marque à un événement sportif, culturel ou une initiative (ex: sponsoriser un hackathon étudiant) pour gagner en visibilité et en capital sympathie.
+    \end{itemize}
+    \textbf{Expérientiel :} Faire vivre une expérience mémorable au public (ex: démonstration VR sur le stand, escape game en ligne sponsorisé). L’idée est de créer une association positive et engageante à la marque.
+    \note{Bien que le marketing se digitalise beaucoup, les interactions directes restent très puissantes, surtout en B2B. Un ingénieur qui va sur un salon peut être mis à contribution sur le stand pour faire des démos ou répondre aux questions techniques. C’est une opportunité de toucher du concret : mettre en avant la solution, recueillir des retours. On parle aussi de sponsoring – par exemple, on voit souvent des entreprises tech sponsoriser des meetups ou des conférences open source, ce qui améliore leur image de marque employeur et utilisateur. L’expérience (expérientiel) devient un mot clé : plus on fait vivre quelque chose d’intense (une démo impressionnante, un jeu, un objet innovant en cadeau), plus la marque restera dans l’esprit du public.}
+\end{frame}
+
+\begin{frame}{Mesurer le marketing \& branding}
+    \textbf{Tunnel de conversion (funnel) :} On évalue la performance marketing à différents stades:
+    \begin{itemize}
+        \item \textbf{Conscience (awareness) :} Indicateurs de notoriété (trafic site web, portée des posts, nouveaux visiteurs, impressions publicitaires). Ex: \% de la cible ayant entendu parler de la marque.
+        \item \textbf{Considération :} Engagement avec le contenu (temps passé sur pages, taux de clics, téléchargements de livres blancs). Ex: nombre d’abonnés à la newsletter (montre un intérêt).
+        \item \textbf{Conversion :} Actions concrètes générées (demande de démo, inscription essai gratuit, achat). Ex: taux de conversion d’une campagne email = leads transformés en clients.
+        \item \textbf{Rétention / fidélisation :} Fidélité de la base (taux de réachat, taux de churn, Net Promoter Score – NPS).
+    \end{itemize}
+    \textbf{KPIs marketing digitaux :}
+    \begin{itemize}
+        \item \textit{Taux de clic (CTR), Taux de conversion, Coût par acquisition (CPA), Coût par clic (CPC), Retour sur investissement (ROI) des campagnes.}
+        \item \textit{SEO} : position moyenne sur mots-clés stratégiques, trafic organique mensuel, \% de clics organiques vs concurrents.
+        \item \textit{Emailing} : taux d’ouverture, taux de clic, taux de désinscription.
+    \end{itemize}
+    \textbf{Brand equity (capital marque) :} Difficile à mesurer directement, mais des enquêtes permettent de suivre l’attachement et l’intention de recommander la marque (via le NPS par ex.). Une marque forte se traduit par plus de conversions à effort marketing égal (effet réputation).
+    \note{Dans le marketing, on utilise beaucoup le concept d’entonnoir (funnel). En haut, le grand public : on veut qu’il nous connaisse. Puis une partie ira plus loin (considération : ils examinent nos contenus). Puis certains passent à l’action (conversion : contact ou achat). Enfin, on essaie de les garder (fidélisation). Chacune de ces étapes a ses métriques. Un ingénieur data pourrait d’ailleurs aider à modéliser ce funnel en suivant les utilisateurs sur une application, etc. On mentionne quelques KPIs clés, dont beaucoup d’acronymes, mais l’idée n’est pas de tous les retenir par cœur, c’est de comprendre l’esprit : on mesure l’efficacité des actions marketing en calculant ce qu’elles rapportent (clics, leads, ventes) par rapport à ce qu’elles coûtent. Pour la marque (branding pur), c’est plus intangible ; on peut quand même voir son effet dans le taux de conversion (une marque connue vend plus facilement) et via des sondages type NPS (le score de recommandation, on demande “sur une échelle de 0 à 10, recommanderiez-vous la marque X?”).}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 4)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Branding :} La marque d’une entreprise synthétise son identité, ses valeurs et sa promesse aux clients. Il est important de maintenir la cohérence de l’identité visuelle et du \textit{storytelling} à travers toutes les communications.
+        \item \textbf{Content marketing :} Fournir du contenu de qualité (articles techniques, tutoriels, livres blancs) attire organiquement les publics cibles et établit l’entreprise comme experte. En tant qu’ingénieur, contribuer à ce contenu (rédaction technique, webinars) valorise vos connaissances et sert la stratégie.
+        \item \textbf{SEO \& SEA :} Le référencement naturel s’appuie beaucoup sur un contenu bien structuré et pertinent. Les efforts d’optimisation technique (vitesse du site, balisage) par les équipes IT contribuent aussi au SEO. Le SEA, lui, permet d’apparaître en tête moyennant finances pour des mots-clés stratégiques.
+        \item \textbf{Événementiel :} Participer ou organiser des événements (salons, conférences, meetups) offre une visibilité directe et des interactions humaines qui renforcent la confiance. 
+        \item \textbf{Mesure marketing :} L’efficacité se mesure sur tout le \textit{funnel} de conversion, depuis la notoriété jusqu’à la fidélité. Des indicateurs existent à chaque étape (taux de clic, taux de conversion, NPS, etc.) et permettent d’ajuster les campagnes et le budget.
+    \end{itemize}
+    \end{block}
+    \note{Pour un profil ingénieur, il faut bien percevoir que le marketing n’est pas de la “poudre aux yeux” : c’est une discipline analytique qui s’appuie sur des données et vise un résultat. Par exemple, si vous développez une nouvelle fonctionnalité, l’équipe marketing va réfléchir à comment la présenter (branding, message) et la promouvoir (content, événement, SEO). Votre rôle peut être de fournir la substance technique et d’aider à vulgariser. Savoir lire les indicateurs marketing (comme le taux de conversion) peut même vous servir dans vos propres projets (ex: si vous maintenez un projet open-source, vous regarderez les stats de téléchargement ou le NPS des utilisateurs). Enfin, participer à l’image de marque de votre entreprise en incarnant ses valeurs (innovation, fiabilité, etc.) dans vos interactions (forums, conférences) renforce ce branding de manière diffuse.}
+\end{frame}
+
+\section{Communication numérique}
+\begin{frame}{Réseaux sociaux : stratégie éditoriale et engagement}
+    \textbf{Lignes éditoriales :} Pour chaque plateforme (Twitter, LinkedIn, Facebook, Instagram, YouTube, etc.), définir le type de contenu et le ton approprié en fonction du public présent:
+    \begin{itemize}
+        \item Twitter : actu chaude, interaction rapide (ton plus informel, réactivité).
+        \item LinkedIn : contenus professionnels, articles longues ou annonces corporate (ton sérieux/expertise).
+        \item Instagram : visuels attractifs (culture d’entreprise, coulisses, design produit).
+        \item YouTube : vidéos tutoriels, webinaires enregistrés, témoignages clients.
+    \end{itemize}
+    \textbf{Calendrier éditorial social :} Planifier à l’avance les posts (quotidiens/hebdo), en équilibrant les types (infos produit, contenu utile, mise en avant employés, actualités sectorielles). Constance rythmée = audience fidélisée.
+    \begin{itemize}
+        \item Ex: chaque lundi, partager une astuce technique (“Tips Monday”), le jeudi un portrait d’employé (\#TeamThursday), etc.
+    \end{itemize}
+    \textbf{Engagement et communauté :} Ne pas juste diffuser, mais \textbf{interagir}:
+    \begin{itemize}
+        \item Répondre aux commentaires et messages (support de premier niveau sur Twitter par ex.).
+        \item Liker/partager des contenus pertinents de la communauté (montrer qu’on écoute).
+        \item Animer des discussions (sondages, questions ouvertes). Ex: un poll LinkedIn sur un enjeu IT actuel pour impliquer la communauté.
+    \end{itemize}
+    \textbf{Modération :} Établir des règles claires (charte d’utilisation) et modérer les commentaires pour supprimer les propos inappropriés, sans censurer les critiques constructives. La réactivité en cas de bad buzz ou commentaire négatif est cruciale pour préserver l’image.
+    \note{Les réseaux sociaux sont souvent gérés par les équipes comm/marketing, mais tout ingénieur peut y contribuer ou au moins doit savoir la stratégie de son entreprise dessus. Par exemple, la ligne éditoriale sur Twitter peut encourager les développeurs de l’entreprise à tweeter sur leurs réalisations en mentionnant le compte officiel. La modération est un point sensible : il faut un juste équilibre entre laisser la parole (même aux critiques) et maintenir un espace respectueux. En interne, on peut vous fournir des guidelines sur comment vous exprimer en ligne en mentionnant l’entreprise (social media policy). Un ingénieur qui interagit en tant qu’employé doit être conscient qu’il reflète la marque. Par ailleurs, la qualité de l’engagement (réponses rapides, ton empathique) est déterminante dans la perception de la marque sur ces réseaux, surtout pour la génération habituée à contacter les marques via Twitter ou Facebook.}
+\end{frame}
+
+\begin{frame}{Outils numériques et organisation}
+    \textbf{Outils de veille et gestion :}
+    \begin{itemize}
+        \item \textbf{Outils de veille (social listening) :} surveiller les mentions de l’entreprise, de ses concurrents ou mots-clés sur les réseaux (ex: Mention, Hootsuite, TweetDeck). Cela permet de détecter rapidement un problème émergent ou de repérer des retours utilisateurs.
+        \item \textbf{Outils de gestion de communauté :} plateformes pour planifier les posts multi-réseaux (Buffer, Hootsuite), répondre aux messages centralisés, analyser les stats d’engagement.
+        \item \textbf{Chatbots :} sur Messenger ou site web pour premier niveau de réponse automatique aux questions fréquentes (24/7), avec possibilité de transfert humain.
+    \end{itemize}
+    \textbf{Accessibilité numérique :} S’assurer que les contenus sont utilisables par tous:
+    \begin{itemize}
+        \item Ajouter des textes alternatifs (alt-text) aux images postées pour les personnes malvoyantes.
+        \item Sous-titrer les vidéos (pour sourds ou utilisateurs sans son).
+        \item Respecter les contrastes de couleur et utiliser un langage clair (langage simple, éviter jargon non expliqué).
+        \item Penser mobile-first (beaucoup consultent via smartphone).
+    \end{itemize}
+    \textbf{Inclusion :} S’adresser à toutes les catégories d’audience sans stéréotypes ni discrimination. Éviter par exemple un langage trop genré ou des références culturelles non universelles si le public est international.
+    \note{Ici on touche au volet technique et organisationnel de la communication numérique. Un ingénieur peut être directement concerné par l’accessibilité : par exemple, si vous développez le site web corporate, il faut respecter les normes (WCAG) sur les contrastes, la navigation clavier, etc. L’accessibilité sur les réseaux se traduit par de bonnes pratiques comme mettre une description aux images (ex: sur Twitter, c’est possible d’ajouter du texte alternatif pour les lecteurs d’écran). C’est une responsabilité sociale et parfois légale (sites publics). Concernant les outils : un social media manager utilise des outils spécialisés pour ne pas tout faire manuellement. On cite Chatbots – c’est intéressant car un développeur peut être amené à collaborer avec le marketing pour implémenter un chatbot sur le site ou sur Facebook. Enfin, sur l’inclusion, en entreprise tech on doit être vigilant à ne pas communiquer de façon exclusive : l’image d’illustration d’une campagne de recrutement par exemple doit refléter la diversité (pas uniquement des personnes d’un même genre ou background). Ce sont des détails qui, accumulés, font la différence dans la perception de la marque.}
+\end{frame}
+
+\begin{frame}{Données personnelles, RGPD et sécurité}
+    \textbf{RGPD et consentement :} Depuis l’entrée en vigueur du RGPD (Règlement Général sur la Protection des Données) en 2018, toute collecte de données personnelles en UE doit être justifiée et consentie:
+    \begin{itemize}
+        \item \textbf{Formulaires web :} mentionner clairement la finalité des données et demander l’opt-in (case à cocher non pré-cochée) pour par exemple recevoir une newsletter.
+        \item \textbf{Cookies :} afficher un bandeau de consentement pour les cookies non essentiels (analytics, pub) et respecter le choix de l’utilisateur (pas de dépôt de trackers sans accord explicite).
+        \item \textbf{Droit à la désinscription / suppression :} tout email marketing doit contenir un lien de désinscription fonctionnel; les utilisateurs ont le droit de demander la suppression de leurs données.
+    \end{itemize}
+    \textbf{Guidelines CNIL/EDPB :} Les autorités (CNIL en France, EDPB en Europe) publient des directives sur par ex. les modalités d’un consentement valable, l’interdiction des “cookie walls” abusifs, etc. Les communicants doivent s’y conformer sous peine de sanctions (amendes RGPD potentiellement très élevées).
+    \vspace{0.5em}
+    \textbf{Sécurité de l’information :} La communication externe doit s’articuler avec la sécurité IT:
+    \begin{itemize}
+        \item \textbf{En cas d’incident (fuite de données) :} Obligation légale de notifier la CNIL sous 72h et parfois les personnes concernées (selon gravité). Planifier des messages de crise spécifiques (voir section crise).
+        \item \textbf{Prudence sur les annonces techniques :} Ne pas divulguer d’informations sensibles qui pourraient être exploitées (ex: détails précis d’infrastructure).
+        \item Sensibiliser le community manager aux risques (hameçonnage de comptes sociaux, besoin d’authentification forte sur ces comptes).
+    \end{itemize}
+    \note{Cette diapo insiste sur l’aspect légal et sécurité. Le RGPD a changé la donne : impossible aujourd’hui de faire du marketing sauvage avec des emails achetés ou de traquer les utilisateurs sans qu’ils le sachent. En tant qu’ingénieur, vous pouvez être amené à implémenter ces mécanismes (bannières cookies, gestion des préférences de consentement dans l’application, etc.). De plus, dans tout contenu ou opération, il faut impliquer le juridique pour valider qu’on reste dans les clous (par exemple, si on veut réutiliser la base client pour une nouvelle campagne, vérifier la base légale de traitement). Concernant la sécurité, un exemple concret : on ne poste pas de capture d’écran montrant des infos confidentielles. On utilise des 2FA sur les comptes Twitter/YouTube de l’entreprise pour éviter les piratages de comptes (il y a eu des cas où des comptes officiels se font hacker et diffuser des arnaques crypto, c’est catastrophique pour la réputation). La coordination entre l’IT et la comm’ est cruciale ici.}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 5)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Social media :} Chaque réseau a ses codes et son audience. La communication doit être adaptée à la plateforme et régulière pour garder l’engagement. Répondre aux utilisateurs rapidement fait partie intégrante du travail (community management).
+        \item \textbf{Outils numériques :} Des solutions techniques aident à monitorer la réputation en ligne (social listening) et à gérer les publications. L’automatisation et l’analyse des données sociales sont devenues indispensables pour une stratégie efficace.
+        \item \textbf{Accessibilité :} S’assurer que les contenus sont accessibles aux personnes en situation de handicap (texte alternatif, sous-titres, langage clair) n’est pas seulement une obligation morale, c’est parfois une contrainte réglementaire (surtout pour les services publics).
+        \item \textbf{Protection des données :} Le RGPD impose le consentement explicite des utilisateurs pour l’utilisation de leurs données et la transparence sur les finalités. En pratique, cela modifie la manière d’implémenter les formulaires, les cookies, les envois d’emails, etc.
+        \item \textbf{Sécurité de la communication :} La présence en ligne de l’entreprise doit être sécurisée (comptes protégés, vigilance sur ce qui est rendu public). Une fuite ou un piratage de compte social peut causer une crise majeure. Les communicants et ingénieurs doivent collaborer en ce sens.
+    \end{itemize}
+    \end{block}
+    \note{Cette section fait le lien direct avec les préoccupations IT. En tant qu’ingénieur, vous serez peut-être le garant technique du respect de la vie privée (privacy by design), ou le référent pour la cybersécurité (ex: c’est souvent l’équipe IT qui gère les accès aux comptes officiels, paramètre l’authentification multi-facteur, etc.). Un message clé : la communication numérique est un domaine où la technologie, le légal et la créativité se rencontrent. Votre rôle peut être d’apporter le regard technique (par ex, expliquer aux communicants ce qu’un cookie fait concrètement pour qu’ils puissent mieux informer l’utilisateur). Inversement, comprendre les obligations légales vous évitera de développer une fonctionnalité qui serait non conforme (ex: un tracking utilisateur sans consentement).}
+\end{frame}
+
+\section{Mesure \& évaluation}
+\begin{frame}{Pourquoi mesurer la communication ?}
+    \textbf{Compte à rendre (\textit{accountability}) :} Les directions demandent de plus en plus de prouver l’impact des budgets communication/marketing. Mesurer permet de démontrer le ROI (retour sur investissement) des actions de communication.
+    \begin{itemize}
+        \item Ex: justifier qu’une campagne à 50k€ a généré pour 200k€ de ventes additionnelles, ou que la notoriété a augmenté de X\%.
+    \end{itemize}
+    \textbf{Pilotage et amélioration continue :} Sans mesure, on navigue à vue. Les KPIs donnent des feedbacks pour ajuster la stratégie en temps réel:
+    \begin{itemize}
+        \item Identifier ce qui fonctionne (on peut amplifier) et ce qui performe moins (on corrige ou on abandonne).
+        \item Apprendre à mieux connaître son audience via l’analyse des données (ex: tel contenu a beaucoup marché auprès d’une tranche d’âge inattendue).
+    \end{itemize}
+    \textbf{Cadres de référence :} L’\textbf{AMEC Integrated Evaluation Framework} et les \textbf{Barcelona Principles} (principes de Barcelone, mis à jour en 2015) fournissent des lignes directrices internationales:
+    \begin{itemize}
+        \item Insistent sur : l’importance de mesurer les \textit{outcomes} (changements effectifs) et non juste les \textit{outputs}, l’abandon des équivalents publicitaires (AVE) au profit de mesures plus qualitatives, etc.
+        \item Standardisent le langage et la méthodologie, ce qui est utile pour comparer dans le temps ou entre campagnes.
+    \end{itemize}
+    \note{Mesurer la communication a parfois été vu comme compliqué, mais c’est indispensable. Un ingénieur peut y voir une analogie avec le monitoring logiciel : on ne lance pas un service en prod sans métriques, logs, etc., sinon impossible de savoir s’il tourne bien ou s’il faut intervenir. Ici c’est pareil : la communication sans métriques ne permet pas de prouver sa valeur ni de l’optimiser. Les Barcelona Principles ont établi notamment : “L’évaluation doit mesurer les effets sur les résultats de l’organisation, pas seulement sur les résultats médiatiques”; “Les équivalences publicitaires (AVE) ne sont pas la valeur de la communication”; “La mesure des médias sociaux doit être prise en compte”; etc. AMEC a concrétisé cela avec un cadre pratique (qu’on voit juste après) qui guide du début (objectifs alignés) à la fin (impact orga). Retenez qu’il y a tout un effort dans la profession pour rendre la mesure plus rigoureuse et crédible.}
+\end{frame}
+
+\begin{frame}{Cadre AMEC d’évaluation intégrée}
+    \begin{center}
+    \begin{tikzpicture}[scale=0.9, every node/.style={scale=0.9}]
+        \tikzset{amecstep/.style={rectangle, draw=blue!50, fill=blue!5, very thick, rounded corners, align=center, text width=3cm, minimum height=1.5cm}}
+        \node[amecstep] (obj) at (0,0) {Aligner objectifs \\ (business \& comm)};
+        \node[amecstep] (input) [below=of obj] {Établir \\
+        benchmarks \\ (situation de départ)};
+        \node[amecstep] (plan) [below=of input] {Plan d'actions};
+        \node[amecstep] (output) [below=of plan] {Outputs \\ (diffusions réalisées)};
+        \node[amecstep] (outtake) [below=of output] {Outtakes \\ (réactions, \\ perception)};
+        \node[amecstep] (outcome) [below=of outtake] {Outcomes \\ (effets \\ sur publics)};
+        \node[amecstep] (impact) [below=of outcome] {Impact organi-\\sationnel (ventes, réputation)};
+        
+        \draw[->, thick] (obj) -- (input);
+        \draw[->, thick] (input) -- (plan);
+        \draw[->, thick] (plan) -- (output);
+        \draw[->, thick] (output) -- (outtake);
+        \draw[->, thick] (outtake) -- (outcome);
+        \draw[->, thick] (outcome) -- (impact);
+    \end{tikzpicture}
+    \end{center}
+    {\footnotesize Source: d’après AMEC Integrated Evaluation Framework.}
+    \vspace{0.3em}
+    \begin{itemize}\footnotesize
+        \item Ce cadre guide la planification \textit{et} l’évaluation : dès la conception, on fixe comment on mesurera chaque étape. Par ex., définir au départ les KPI d’outputs (ex: \# de communiqués envoyés, \# posts publiés) \textit{et} d’outcomes (ex: augmentation de X\% du trafic web).
+        \item \textbf{Outil en ligne AMEC :} propose pour chaque étape des suggestions de métriques et méthodes (ex: pour outtakes, \% des articles mentionnant le message clé, score de sentiment, etc.).
+        \item Au final, on cherche à relier les retombées de communication à l’impact sur les objectifs de l’organisation. Ex: 100 leads générés (outcome) dont 10 convertis en clients apportant 100k€ (impact business).
+    \end{itemize}
+    \note{Ce schéma synthétise l’approche de l’AMEC. Il faut le lire comme un processus : on part des objectifs alignés (comm \& business ensemble), on établit un point de référence (benchmark), on exécute le plan (actions = outputs), on mesure comment l’audience a réagi (outtakes), ce que ça a changé concrètement (outcomes), et enfin on voit la contribution au résultat global (impact). L’idée maîtresse : on ne s’arrête pas à mesurer combien de tweets on a postés ou combien d’articles de presse on a eus, on cherche à voir si le comportement ou l’opinion de nos publics ont évolué, et si in fine ça a servi l’entreprise (ventes accrues, meilleure réputation, etc.). Pour un ingénieur data, ce cadre est un canevas sur lequel construire un dashboard. C’est intéressant car ça mixe des données quantitatives (ex: nb de leads, de ventes) et qualitatives (tonalité des articles, satisfaction client). Ce n’est pas toujours facile d’attribuer une cause à effet (par ex., +10 pourcent de ventes vient-il de la campagne com ou d’autres facteurs?), mais l’approche intégrée incite à essayer de rapprocher ces mondes.}
+\end{frame}
+
+\begin{frame}{Outils d’attribution et de reporting}
+    \textbf{Attribution multi-touch :} technique analytique pour créditer chaque point de contact dans la conversion d’un client. En effet, un client voit peut-être une pub, puis lit un article, puis clique un email avant d’acheter.
+    \begin{itemize}
+        \item Modèles d’attribution : linéaire (chaque contact contribue également), dépréciation temporelle (plus on est proche de l’achat, plus ça compte), “premier clic” (on donne tout le crédit au premier point de contact), “dernier clic” (crédit au dernier).
+        \item Outils web analytics (Google Analytics, etc.) proposent ces modèles pour évaluer par exemple le rôle du SEO vs. SEA vs. emailing dans la conversion.
+        \item UTM tracking : on ajoute des paramètres UTM aux URL de campagne pour identifier la source et la campagne dans les outils analytics, permettant de suivre précisément l’origine des conversions.
+    \end{itemize}
+    \textbf{Tableaux de bord (dashboard) :} Un bon dashboard de com externe agrège les KPI clés de différentes sources de façon lisible:
+    \begin{itemize}
+        \item Ex: un tableau de bord mensuel pouvant comporter : \# de visites site (et part issues SEO), \# leads générés, taux de conversion lead->client, sentiment moyen sur médias sociaux, \# d’articles presse obtenus, score de notoriété (via enquête), etc.
+        \item Visualisation : usage de graphiques pour tendances (ex: courbe du trafic web), de jauges pour taux de réalisation vs objectif (ex: objectif 100 leads/mois, on en a 85 = 85\% de la jauge), de codes couleur (vert = objectif atteint, orange = attention, rouge = en retard).
+        \item Focus ROI : Intégrer si possible une estimation de ROI (ex: coût de la campagne vs revenus générés, ou \# contacts utiles générés) pour montrer l’efficacité.
+    \end{itemize}
+    \note{Pour un ingénieur, c’est la partie la plus “données” de la com. Par exemple, l’attribution multi-touch est un peu comme du tracking d’un parcours utilisateur. On attache un UTM quand on envoie un email ou on poste un lien sur Twitter, pour savoir d’où viennent les visiteurs. Google Analytics ou d’autres outils permettent de choisir comment on attribue la vente finale aux différents points de contact (c’est un domaine complexe et parfois controversé, mais ça donne des tendances). Concernant les dashboards, si vous avez un esprit analytique, vous pouvez aider l’équipe comm/marketing à concevoir un bon tableau de bord, voire l’automatiser via un outil BI. L’idée est d’extraire les données des différentes plateformes (Google Analytics, outil emailing, CRM, réseaux sociaux) et de les consolider. C’est similaire à ce qu’on fait en ingénierie avec des dashboards de monitoring (ex: un Grafana pour la performance d’un système). Sauf qu’ici c’est de la performance “marketing”. Enfin, la représentation visuelle est cruciale pour que le management puisse en un coup d’œil capter la situation.}
+\end{frame}
+
+\begin{frame}{Limites et biais de mesure}
+    \textbf{Liens de causalité :} En communication, il est parfois difficile d’isoler les effets. Une hausse de ventes peut provenir de la campagne de comm, mais aussi d’autres facteurs (saison, actu concurrent). Il faut rester prudent dans l’analyse:
+    \begin{itemize}
+        \item Utiliser quand possible des méthodes de test contrôle (ex: campagnes A/B sur un échantillon vs un groupe témoin sans campagne) pour mieux attribuer l’effet.
+        \item Interroger qualitativement les clients (“Comment avez-vous entendu parler de nous ?”) pour recouper les données quantitatives.
+    \end{itemize}
+    \textbf{Biais de mesure :}
+    \begin{itemize}
+        \item \textbf{Biais de sélection :} les sondages de réputation n’atteignent pas forcément les non-clients ou les mécontents (qui ne répondent pas), faussant le score.
+        \item \textbf{Biais d’attribution derniers clic :} on a tendance à surévaluer le dernier point de contact car plus facile à tracer, au détriment du travail de fond (ex: influence de la marque établie de longue date).
+        \item \textbf{Metrics vanity :} Nombre de followers ou de likes peut flatter, mais ce n’est pas forcément corrélé aux résultats business. Se concentrer sur les indicateurs alignés aux objectifs réels (mieux vaut 100 followers très engagés qui deviennent clients que 1000 fantômes).
+    \end{itemize}
+    \textbf{Éthique de la mesure :} Respect de la vie privée (anonymisation des données clients dans les analyses), transparence sur les chiffres (ne pas manipuler les statistiques pour se mettre en valeur de manière trompeuse), et éviter la “tyrannie du chiffre” (tout n’est pas quantifiable facilement, ex: la confiance se construit aussi qualitativement).
+    \note{Enfin, on relativise un peu la toute-puissance des chiffres. Pour un ingénieur, c’est un rappel que comme pour un système de monitoring, il faut bien choisir ses métriques et interpréter avec recul. Par exemple, un CPU à 90\% n’est pas forcément mauvais s’il reste stable et qu’aucun ralentissement ne se fait sentir (c’est de l’optimisation); de même 1 million de vues YouTube d’une pub ce n’est bien que si ça touche la bonne cible et que ça génère du concret derrière. On mentionne aussi la difficulté des causalités multiples. Par analogie, quand on corrige un bug et qu’on déploie en même temps une mise à jour système, on peut avoir du mal à savoir quelle action a résolu le problème. En marketing c’est pareil, beaucoup de paramètres bougent. Il faut une approche un peu scientifique (contrôle/test quand possible). L’éthique rejoint RGPD (pas tricher avec les data) et la sincérité : par ex, ne pas dire “+300\% de croissance d’audience !” alors qu’on est passé de 10 à 40 visiteurs (c’est techniquement vrai mais trompeur si on ne donne pas les bases).}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 6)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Mesurer pour progresser :} La communication externe n’est pas un “art” inévaluable : on dispose de nombreux indicateurs pour en suivre la performance. Comme en ingénierie, on instrumente pour comprendre et améliorer.
+        \item \textbf{Cadre structuré :} Suivre un framework (comme celui de l’AMEC) aide à lier les efforts de com aux résultats organisationnels. Cela évite de se limiter à des métriques d’activité (outputs) et pousse à chercher l’impact réel (outcomes/impact).
+        \item \textbf{Données multi-sources :} Un plan de com produit des données hétérogènes (web analytics, CRM ventes, réseaux sociaux, enquêtes). L’ingénieur peut contribuer en agrégeant ces données et en construisant des dashboards clairs qui facilitent la prise de décision.
+        \item \textbf{Attribution :} Comprendre les modèles d’attribution aide à créditer justement chaque canal. Techniquement, cela repose sur un bon suivi (UTM, tags) et des analyses statistiques.
+        \item \textbf{Esprit critique :} Garder en tête les biais (une corrélation n’est pas forcément une causalité) et ne pas se focaliser sur des vanités (par ex, \# d’abonnés sans s’intéresser à qui ils sont). Mesurer la communication reste un exercice parfois imparfait, mais indispensable pour justifier les investissements et optimiser les choix.
+    \end{itemize}
+    \end{block}
+    \note{Pour un ingénieur, cette section montre que finalement la communication externalisée s’appuie sur une démarche proche de celle d’un projet technique : définir des objectifs mesurables, collecter des données, analyser, ajuster. Vos compétences analytiques et votre maîtrise des outils de data peuvent être mises à contribution. Par exemple, il n’est pas rare que l’équipe marketing demande à la DSI de l’aider à mettre en place une base de données ou un datalake pour centraliser toutes les infos clients et interactions, afin de faire du reporting plus poussé. A minima, sachez que derrière les annonces “on a eu 500 leads”, “notre NPS est passé de 30 à 45”, il y a des méthodes de calcul et des contextes à comprendre. Ne prenez pas les chiffres pour acquis sans chercher leur signification réelle. Enfin, en tant que professionnel, quand vous présenterez vos propres résultats (d’un projet, d’un service), inspirez-vous de cette rigueur : donnez des indicateurs concrets, mais honnêtes.}
+\end{frame}
+
+\section{Communication de crise}
+\begin{frame}{Typologie des crises (focus tech)}
+    \textbf{Qu’est-ce qu’une crise ?} Un événement soudain qui menace les personnes, les actifs, les opérations ou la réputation de l’organisation, et nécessitant une réponse rapide et non routinière. En contexte tech, on peut distinguer :
+    \begin{itemize}
+        \item \textbf{Crise cyber :} ex. fuite massive de données, attaque ransomware paralysant les services. Menace la confiance et peut avoir des implications légales (RGPD).
+        \item \textbf{Panne majeure / outage :} ex. indisponibilité prolongée d’un service cloud ou d’une application critique (plusieurs heures/jours). Affecte potentiellement des millions d’utilisateurs.
+        \item \textbf{Crise produit :} ex. découverte d’un défaut grave dans un produit hardware (batteries qui explosent – cf. Samsung Note7), ou d’un biais éthique dans un algorithme d’IA. Impact sur la sécurité ou l’éthique.
+        \item \textbf{Crise RH / interne :} ex. scandale de harcèlement chez un éditeur logiciel, ou départ chaotique d’un fondateur charismatique. Impact sur l’image institutionnelle plus que sur la technique.
+        \item \textbf{Crise réglementaire :} ex. sanction d’une autorité (CNIL inflige une amende record), litige judiciaire très médiatisé.
+    \end{itemize}
+    \textbf{Différence incident vs. crise :} Un incident (même technique) est souvent contenu et géré par les procédures normales, alors qu’une crise se caractérise par son caractère exceptionnel, la perte de contrôle initial et une forte pression temporelle/médiatique. ISO 22361 souligne qu’une crise dépasse souvent les plans prédéfinis et nécessite une adaptation ad hoc.
+    \note{Il est important de catégoriser les crises car la réponse à apporter peut varier. Par exemple, une panne technique majeure (style “Facebook down pendant 6h”) demandera de communiquer rapidement aux utilisateurs sur l’état et la résolution, alors qu’une crise type scandale éthique demandera plutôt des excuses publiques et des mesures correctrices structurelles. Le point sur incident vs crise est tiré de l’ISO 22361 qui dit en gros qu’un incident est souvent gérable avec un plan prévu (ex: un serveur qui tombe, on a un plan de reprise) alors qu’une crise est d’une ampleur ou d’une nature telle que les réponses pré-planifiées ne suffisent pas, il y a un caractère unique ou imprévu. Par exemple, une brèche de sécurité peut rester un incident si elle est colmatée vite et peu de données touchées, ou devenir une crise si elle prend de l’ampleur publique et remet en cause la confiance globale. Pour un ingénieur, comprendre ces définitions aide à se rendre compte quand un problème technique sort de l’ordinaire et nécessite d’alerter la cellule de crise communication.}
+\end{frame}
+
+\begin{frame}{Organisation de la réponse de crise}
+    \textbf{Cellule de crise :} Équipe multi-disciplinaire activée dès qu’une crise est identifiée. En général:
+    \begin{itemize}
+        \item \textbf{Dir. de crise :} souvent un membre du top management (DG ou autre) qui pilote globalement.
+        \item \textbf{Communication de crise :} un porte-parole principal désigné + l’équipe comm/PR pour préparer messages et interactions médias.
+        \item \textbf{Experts techniques :} selon la crise, ex. le CTO ou RSSI pour une cyberattaque, qui apportent les faits et supervisent la résolution technique.
+        \item \textbf{Juridique :} pour valider les aspects légaux des communications (ne pas admettre de responsabilité au-delà du nécessaire, respecter obligations de notification).
+        \item \textbf{Autres :} RH si crise interne, relation clients/CRM si de nombreux clients à informer individuellement, etc.
+    \end{itemize}
+    \textbf{Rôles de porte-parole :} 
+    \begin{itemize}
+        \item Un(e) seul(e) porte-parole principal(e) vis-à-vis des médias pour assurer cohérence (souvent le DG ou un dirigeant clé). Formé aux techniques d’interview difficiles.
+        \item D’autres porte-parole secondaires pour publics spécifiques: ex. un chef de produit pour rassurer les grands clients B2B lors d’appels dédiés, etc.
+        \item Règle d’or: ne communiquer que des informations vérifiées, et mettre à jour régulièrement (même pour dire “on enquête toujours, prochain point à telle heure”).
+    \end{itemize}
+    \textbf{Logistique \& war room :} Lieu (physique ou virtuel) où la cellule se réunit en continu. Outils de conf call sécurisés, canaux de communication internes de crise (ex: une messagerie de secours hors du système habituel si le SI est tombé).
+    \note{C’est ici l’aspect organisationnel de la gestion de crise. On met en place une structure claire. Un ingénieur pourra être appelé à en faire partie pour l’expertise technique. Il faut dès maintenant savoir qui serait dans la boucle en cas de gros pépin. Par exemple, si l’application tombe pendant 8h, le CTO et les ingénieurs ops bossent à la résolution, mais un responsable comm doit être à côté pour préparer les messages (ex: tweets d’excuses, bulletins d’avancement). Le rôle du porte-parole unique est d’éviter les cacophonies : si 5 personnes de l’entreprise parlent aux médias et racontent des versions différentes, c’est la confusion totale. D’où la consigne : renvoyer toutes les sollicitations vers la cellule comm de crise et ne pas s’exprimer publiquement sans autorisation. Concernant la “war room”, c’est un terme emprunté aux militaires/campagnes politiques pour désigner la salle de crise. Dans la pratique, ça peut être une salle de réunion dédiée avec des tableaux, ou un canal Slack spécial. L’ISO 22361 et d’autres soulignent l’importance de préparatifs logistiques (par ex, avoir les contacts d’urgence de tous les membres de la cellule, un système de teleconference prêt à l’emploi).}
+\end{frame}
+
+\begin{frame}{Plan de communication de crise}
+    \textbf{Avant la crise : préparation}
+    \begin{itemize}
+        \item \textbf{Plan de crise (plan d’urgence)} documenté : liste des scénarios de crise possibles, responsable(s) attitrés, check-lists d’actions. Ex: “Crise Cyber” -> actions : isoler le système, activer RSSI, brouillon de communiqué type prêt.
+        \item \textbf{Kit de crise préparé :} templates de communiqués d’urgence, Q\&A pré-rédigées pour les médias avec réponses validées sur questions sensibles (“Que dire si on nous demande si des données clients sont volées ?”).
+        \item \textbf{Entraînements :} simulations régulières (“exercices”) pour tester la réactivité de la cellule. Ex: jeu de rôle d’une intrusion hacker un samedi soir – comment l’équipe s’organise en temps réel.
+    \end{itemize}
+    \textbf{Pendant la crise : messages clés}
+    \begin{itemize}
+        \item \textbf{Empathie et excuse si approprié :} débuter par exprimer la compréhension de la gravité pour ceux affectés (“Nous sommes désolés de la gêne occasionnée…”).
+        \item \textbf{Faits avérés uniquement :} communiquer ce qui est confirmé. Ne pas spéculer. Ex: “Une panne électrique a causé l’arrêt de nos serveurs à 10h45. Nos équipes travaillent à rétablir…”.
+        \item \textbf{Engagement sur suite :} dire ce qui est fait pour résoudre et prévenir (“Nous mettons tout en œuvre pour rétablir le service d’ici X. Un audit sera conduit pour éviter qu’un tel incident se reproduise.”).
+        \item \textbf{Canaux :} utiliser tous les canaux nécessaires pour toucher les parties prenantes : communiqué de presse pour médias, emails directs aux clients, bandeau sur le site, posts sur réseaux sociaux, hotline spéciale si besoin.
+    \end{itemize}
+    \textbf{Après la crise : post-mortem et transparence}
+    \begin{itemize}
+        \item Une fois la crise résolue, communiquer un débrief (cause identifiée, mesures prises). Ex: publication d’un rapport d’incident technique (type \textit{post-mortem} ouvert pour la communauté technique).
+        \item Remercier les clients/utilisateurs de leur patience, éventuellement offrir un geste commercial si approprié (crise service).
+    \end{itemize}
+    \note{En crise, la communication est une composante critique du plan de réponse global. Avant, on se prépare : un plan de crise bien ficelé fait gagner un temps fou quand ça arrive pour de vrai. Pensez-y comme des plans de reprise après sinistre en IT : on espère ne pas avoir à s’en servir, mais s’il y a une panne, on a le runbook. On mentionne les simulations : par ex. les grandes entreprises font des simulations de crise médiatique, comme un faux journaliste qui appelle pour tester la réaction du standard. Pendant la crise, la règle c’est la transparence mais maîtrisée : on ne ment pas ni minimise de façon mensongère (sinon la perte de confiance sera double quand la vérité sortira), mais on ne dit pas non plus ce qu’on ignore ou qui pourrait aggraver inutilement la panique. Par ex, en cas de suspicion de hack de données, on ne va pas crier “tout est compromis” avant d’avoir vérifié, on dit “on enquête pour déterminer l’ampleur, on vous tient informés”. L’empathie est essentielle : si des utilisateurs sont impactés, il faut montrer qu’on se soucie d’eux avant tout, pas seulement de sauver la face. Après la crise, un ingénieur sera très impliqué dans le post-mortem technique, et c’est souvent très apprécié que ce post-mortem soit partagé publiquement (surtout dans le monde tech, cf. les blog posts de Cloudflare ou GitHub après incidents). Cela montre du professionnalisme et de l’apprentissage, et c’est bon pour regagner la confiance.}
+\end{frame}
+
+\begin{frame}{Normes et coordination en situation de crise}
+    \textbf{Normes / standards utiles :}
+    \begin{itemize}
+        \item \textbf{ISO 22361:2022} – Lignes directrices en management de crise. Donne un cadre international sur la préparation, la communication de crise et le retour d’expérience.
+        \item \textbf{NIST Cybersecurity Framework / NIST SP 800-61} (guide US) – intègre la communication dans la gestion d’incident de sécurité (phase “Communications” dans la réponse).
+        \item \textbf{RGPD} – Articles 33 et 34 imposent notification aux autorités sous 72h et aux individus si données sensibles fuitées. Donc, communication obligatoire dans certains scénarios.
+        \item \textbf{PRSA Code of Ethics} – en crise, respecter les valeurs d’honnêteté et de loyauté envers le public (ne pas mentir ou cacher des informations cruciales).
+    \end{itemize}
+    \textbf{Coordination autorités / légal :}
+    \begin{itemize}
+        \item Dans certaines crises (ex: sécurité, santé), les autorités (gouvernement, agence régulation) s’en mêlent. Il faut synchroniser la com avec elles pour éviter les contradictions.
+        \item \textit{Ex:} fuite de données clients – coordonner l’annonce publique avec l’autorité (CNIL) et la police si enquête, afin de ne pas nuire aux investigations ou aux exigences légales. 
+        \item Si des actions judiciaires sont probables, la communication doit être approuvée par les juristes pour ne pas avouer une faute juridique ou admettre une responsabilité trop tôt.
+    \end{itemize}
+    \textbf{Timing :} “Golden hour” – les premières heures dictent souvent la trajectoire de la crise. D’où l’importance de réagir extrêmement vite (même avec un message partiel du type “Nous sommes conscients du problème, plus d’infos à suivre” plutôt que silence).
+    \note{Cette diapo finalise la partie crise en mentionnant qu’il existe des référentiels. ISO 22361 est tout neuf (2022) et il formalise les bonnes pratiques. Un ingénieur n’a pas à le connaître par cœur, mais juste savoir qu’il existe et que son entreprise peut s’en inspirer pour construire son plan de crise. Le NIST SP 800-61 est connu des équipes sécurité, c’est bien de l’évoquer car souvent la comm de crise en cas cyber est traitée dans ce document. Sur le RGPD, c’est un rappel : si on perd des données personnelles, on ne peut pas juste le cacher et espérer que ça passe – il y a une obligation de notification qui force la main sur la communication. Concernant les autorités, imaginez une crise type explosion d’une batterie de smartphone blessant des gens – là des agences de sécurité produit ou le ministère peuvent faire des déclarations aussi, donc il faut se coordonner. Un mauvais exemple fut Boeing lors des crashes 737 MAX : leurs comm internes et celles des autorités ont parfois divergé, ce qui a empiré la méfiance. En résumé, en crise il vaut mieux dire quelque chose rapidement, même incomplet, que de laisser un vide (qui sera comblé par des rumeurs ou l’indignation).}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 7)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Crises techniques :} Les pannes majeures ou incidents de sécurité peuvent devenir des crises médiatiques. L’ingénieur, souvent en première ligne pour résoudre le problème, doit aussi comprendre l’importance de communiquer aux non-techniques (via le porte-parole) sur ce qui se passe.
+        \item \textbf{Plan de crise :} Comme on a des plans de reprise en IT, il existe des plans de com de crise. Mieux vaut s’y entraîner et les avoir préparés (contacts, messages types) que d’improviser sous le stress. Participer aux simulations de crise de l’entreprise vous préparera à ces situations.
+        \item \textbf{Rôle du porte-parole :} En crise, on parle d’une seule voix. Ne diffusez pas d’informations sur les réseaux ou à l’extérieur de votre propre chef en plein incident critique – tout doit passer par la cellule de crise pour cohérence et véracité.
+        \item \textbf{Transparence mesurée :} Il faut informer honnêtement, sans minimiser ni exagérer. Reconnaître la situation, montrer de l’empathie et prendre ses responsabilités quand nécessaire (en présentant des excuses sincères, sans chercher d’excuses). Cependant, ne communiquez que des faits vérifiés pour ne pas devoir vous rétracter plus tard.
+        \item \textbf{Retour d’expérience :} Après la crise, l’analyse post-mortem (technique \textit{et} communicationnelle) est cruciale. Ce qui a été appris doit servir à améliorer les process (ex: renforcement de la sécu, mise à jour du plan de crise) et à regagner la confiance par des actions tangibles.
+    \end{itemize}
+    \end{block}
+    \note{Pour vous, ingénieurs, la leçon est que la communication fait partie intégrante de la gestion d’une crise technique. Si vous rétablissez un système mais que les clients ont été laissés dans le noir pendant des heures sans info, le dommage réputationnel est fait. Donc travail d’équipe : pendant que certains fixent l’incident, d’autres communiquent. Vous pourriez être appelé à expliquer en langage clair ce qui s’est passé une fois l’urgence passée (post-mortem). Il faut aussi accepter que dans certains cas, dire “pardon” publiquement est nécessaire – ce n’est pas admettre un échec personnel, c’est la bonne pratique pour apaiser. On mentionne la “transparence mesurée” : ça signifie ne pas tout déballer n’importe comment. Par ex, on ne va pas donner les détails IP du hacker en conférence de presse (ça ne parle à personne et pourrait nuire à l’enquête), mais on va dire “une attaque sophistiquée a eu lieu”. Et quand on ne sait pas encore une cause, on le dit plutôt que d’inventer une explication qui pourrait être réfutée ensuite. Enfin, le RETEX (retour d’expérience) concerne autant la technique (blinder le système) que la com (évaluer si nos messages ont bien été perçus, si nos canaux étaient efficaces, etc.).}
+\end{frame}
+
+\section{Réputation \& éthique}
+\begin{frame}{E-réputation et veille d’opinion}
+    \textbf{E-réputation :} c’est la \textbf{réputation en ligne} de l’entreprise ou des personnes associées (dirigeants, produits). Formée par tout ce qui se dit sur Internet : articles, forums, réseaux sociaux, avis clients, etc.
+    \begin{itemize}
+        \item \textbf{Influence du référencement :} souvent les premières impressions sont via Google. D’où l’importance de bien référencer les contenus positifs officiels et de \textit{travailler} à limiter la visibilité des résultats négatifs (dans le respect de l’éthique – éviter actions malhonnêtes de “déréférencement abusif”, mais on peut par ex. produire du contenu pour occuper l’espace).
+        \item Les plateformes d’avis (Google Reviews, Trustpilot, Glassdoor pour l’image employeur) jouent un rôle majeur. Une note moyenne basse peut faire fuir prospects ou candidats.
+    \end{itemize}
+    \textbf{Veille et écoute :}
+    \begin{itemize}
+        \item Mettre en place une veille continue sur les mentions de la marque (Google Alerts, outils dédiés) pour détecter tôt un bad buzz ou une tendance de fond.
+        \item Surveiller aussi les discussions sur vos technologies sur GitHub, Stack Overflow ou Reddit par exemple – elles reflètent la réputation technique.
+        \item \textbf{Indice de réputation :} Certaines agences proposent des baromètres (ex: classement des entreprises les plus admirées, scoring de sentiment sur réseaux) – cela peut servir d’indicateur synthétique annuel.
+    \end{itemize}
+    \textbf{Actions proactives :} 
+    \begin{itemize}
+        \item Encourager les clients satisfaits à laisser des avis positifs (sans manipuler artificiellement). 
+        \item Répondre publiquement aux avis négatifs de manière constructive (montre qu’on prend en compte et qu’on cherche à améliorer).
+        \item Publier régulièrement des contenus valorisants (succès, engagements RSE, témoignages clients) – alimente l’image positive.
+    \end{itemize}
+    \note{L’e-réputation est parfois du ressort du service comm, parfois du marketing, voire d’agences spécialisées. C’est un aspect à ne pas négliger car un ingénieur ou un futur employé aura presque toujours le réflexe de “googler” l’entreprise. Des sites comme Glassdoor donnent la parole aux employés, ce qui impacte la marque employeur. Par exemple, Amazon a eu des soucis d’image employeur à cause de mauvais retours sur les conditions de travail d’entrepôt – cela a obligé la comm à réagir et travailler ce point. L’ingénieur peut contribuer à l’e-réputation technique en étant actif dans la communauté open-source, en répondant aux questions sur les forums (cela fait rayonner son entreprise comme experte et aidante). On souligne que la veille c’est un peu l’équivalent d’un IDS/monitoring mais pour la réputation : repérer vite un problème pour réagir tant qu’il est gérable. Ex: un tweet critique isolé peut être traité par une réponse cordiale, alors que s’il devient viral sans réponse, le narratif échappe à l’entreprise.}
+\end{frame}
+
+\begin{frame}{Éthique et conformité en communication}
+    \textbf{Code d’éthique (ex: PRSA) :} En communication, on se conforme à des valeurs clés:
+    \begin{itemize}
+        \item \textbf{Honnêteté :} ne pas tromper le public, ne pas diffuser de fausses informations (y compris dans la pub).
+        \item \textbf{Loyauté :} servir l’intérêt du client/entreprise mais sans violer l’intérêt public (balance à trouver).
+        \item \textbf{Respect :} pas de diffamation, respect de la dignité des personnes dans les messages.
+        \item \textbf{Transparence :} notamment sur les partenariats (mention “sponsorisé” sur un article payant, etc.).
+    \end{itemize}
+    \textbf{RGPD / données perso :} Éthique et légal se rejoignent:
+    \begin{itemize}
+        \item Ne pas exploiter les données personnelles au-delà de ce qui a été consenti. Ex: ne pas utiliser un email collecté pour un webinaire afin d’envoyer plus tard de la pub si la personne n’a pas opt-in pour cela.
+        \item “Privacy by design” dans les campagnes marketing digitales – ex: paramétrer Google Analytics en mode conforme (anonymisation IP, etc.), offrir un vrai choix cookie.
+    \end{itemize}
+    \textbf{Responsabilité sociétale (RSE) :} La communication externe doit être cohérente avec les engagements RSE de l’entreprise:
+    \begin{itemize}
+        \item \textbf{Greenwashing à bannir :} ne pas survendre des qualités écolo non fondées. La sincérité est cruciale car le public est vigilant.
+        \item \textbf{Inclusivité :} représenter la diversité dans les visuels et messages (ne pas véhiculer de clichés discriminants). Adapter la communication pour qu’elle soit compréhensible par différents publics (langage, supports).
+    \end{itemize}
+    \textbf{IA générative et info :} Avec l’essor des IA type GPT, risque de \textit{deepfakes} ou de contenus trompeurs:
+    \begin{itemize}
+        \item Les communicants doivent vérifier l’authenticité des sources, et signaler si un contenu est généré artificiellement.
+        \item Politique interne sur l’utilisation de l’IA (ex: pas d’usage d’images deepfake pour promouvoir un produit sans mentionner que c’est fictif).
+    \end{itemize}
+    \note{La dimension éthique est de plus en plus mise en avant car le public y est attentif. Pour un ingénieur, cela rejoint l’éthique de l’IA ou de l’ingénierie : ne pas tromper, ne pas nuire. Par exemple, si vous développez une campagne qui collecte des données, poser la question “est-ce qu’on en a vraiment besoin? est-ce qu’on le dit clairement?”. On mentionne l’IA car c’est un sujet actuel : on peut imaginer par ex la tentation de créer de faux témoignages vidéo d’utilisateurs via deepfake – ce serait gravement anti-éthique. Mieux vaut utiliser la tech pour de bonnes causes (ex: sous-titrage automatique, oui; tromperie, non). Sur la RSE, pour illustrer, des entreprises se sont fait épingler pour avoir par ex. fait une pub mettant en avant la diversité alors qu’en interne c’était pas du tout ça – il y a un backlash possible (accusations de “washing”). Enfin, en com, mentionner ses sources ou sponsor (transparence) est comme citer ses références académiques – c’est la base de la crédibilité.}
+\end{frame}
+
+\begin{frame}{RISQUES spécifiques de l’ère digitale}
+    \textbf{Fake news / désinformation :} Les entreprises tech peuvent être victimes de rumeurs virales infondées (ex: “tel logiciel espionne vos données”). Il faut prévoir de:
+    \begin{itemize}
+        \item Surveiller activement ces narratives émergentes.
+        \item Répondre factuellement via les canaux officiels rapidement pour démentir (une page “mythes vs réalités” peut être utile).
+        \item Mobiliser la communauté d’utilisateurs fidèles pour relayer la vérité (lorsque spontané, c’est plus crédible).
+    \end{itemize}
+    \textbf{Deepfakes :} Possibilité de fausses vidéos plausibles d’un PDG disant des choses qu’il n’a jamais dites.
+    \begin{itemize}
+        \item Nécessite de communiquer sur la vigilance vis-à-vis des sources officielles (ex: “Nos annonces officielles se font sur notre site et notre chaîne YouTube vérifiée”).
+        \item En interne, former les dirigeants à l’existence de ces risques. Et techniquement, envisager des filigranes ou signatures numériques sur les vidéos légitimes pour pouvoir prouver l’authenticité.
+    \end{itemize}
+    \textbf{Hacking de la communication :}
+    \begin{itemize}
+        \item Compte Twitter corporate piraté qui poste des messages faux ou offensants – prévoir un plan (récupération du compte via Twitter rapidement, communiqué disant “nos comptes ont été compromis, ne tenez pas compte des messages de [heure] à [heure]”).
+        \item Typosquatting / phishing de clients : si des attaques phishing se font en usurpant l’identité de l’entreprise, informer le public (ex: envoi d’email d’alerte “Attention aux faux emails prétendant venir de nous”).
+    \end{itemize}
+    \textbf{Cancel culture :} Un propos mal perçu d’un dirigeant ou une ancienne polémique peut ressurgir et entraîner un appel au boycott en ligne. D’où importance d’une \textbf{veille historique} (savoir ce qui dans le passé de la boîte pourrait poser problème) et d’une préparation de réponse (excuses, explication du contexte, ou prise de distance selon le cas).
+    \note{Ces risques sont très contemporains et complexes à gérer. L’entreprise doit presque mener une “cyber-sécurité” de sa communication. On voit des deepfakes de plus en plus réalistes (ex: une fausse annonce de la Maison Blanche qui a circulé). Pour une entreprise, l’impact serait énorme si les investisseurs ou clients croient une fausse vidéo d’annonce (penser par ex. à un faux message “on a fait faillite” – il y a urgence absolue à démentir). L’aspect hacking des canaux officiels est aussi concret : des hacktivistes pourraient cibler une entreprise pour faire passer un message. D’où : authentification forte, plan de reprise (avoir un méta-canal de secours, ex. si Twitter hacké, publier sur site officiel car site probablement plus sécurisé). Typosquatting : un site “amaz0n.com” qui ressemble – la comm doit éduquer les clients sur comment vérifier qu’ils sont bien sur le bon site. Cancel culture, ça concerne plus l’image publique : il faut monitorer aussi ce qui se dit sur les dirigeants etc. Par exemple, une vieille déclaration peu inclusive peut ressortir sur Twitter, et la comm devra gérer les conséquences (communication d’excuses publiques, engagement à faire mieux, etc.). Tout cela fait partie de la gestion de la réputation et du risque.}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 8)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item \textbf{Réputation durable :} La réputation se construit sur la cohérence entre ce que l’entreprise dit et fait. Chaque interaction (un tweet, un support client, un produit bien ou mal fini) y contribue. Il faut donc aligner communication et réalité terrain.
+        \item \textbf{Surveiller l’opinion :} Des outils et une vigilance humaine permettent de détecter les signaux faibles en ligne (une plainte isolée qui enfle, un article de blog critique, etc.). Mieux vaut traiter tôt un problème de réputation avant qu’il ne prenne trop d’ampleur.
+        \item \textbf{Agir avec éthique :} Une communication manipulateur ou mensongère finit presque toujours par être découverte à l’ère d’Internet. L’ingénieur, qui souvent manipule des données ou construit des produits, doit refuser de travestir la réalité dans les messages. Ex: ne pas truquer un benchmark pour faire briller un produit – c’est contre-productif si découvert.
+        \item \textbf{Éviter les biais involontaires :} Dans la com externe, prêter attention à représenter la diversité, à respecter la vie privée, à ne pas faire d’humour déplacé ou de claims techniques infondés (les geeks en face repéreront l’exagération!). Ceci relève de l’éthique professionnelle.
+        \item \textbf{Nouveaux dangers :} L’ingénieur doit être conscient des menaces de deepfake et de piratage de la com. Cela rejoint la cybersécurité – protéger les identités numériques de l’entreprise, et savoir réagir en cas de désinformation en ligne.
+    \end{itemize}
+    \end{block}
+    \note{Cette dernière section adopte un point de vue très “valeurs et risques”. Le takeaway principal pour vous est de toujours garder l’honnêteté et la rigueur technique dans les communications. Par exemple, si marketing veut communiquer une performance, vous devez vous assurer que c’est mesuré correctement et contextualisé, sinon la crédibilité technique sera entamée. Vous êtes aussi les gardiens de l’éthique algorithmique : par exemple, si un communiqué dit “notre IA est sans biais”, en tant qu’ingé ML vous savez que c’est impossible – il faut nuancer, sinon la communauté tech va étriller cette affirmation. Enfin, sachez que la réputation de votre entreprise peut vous affecter directement (fierté d’appartenance ou au contraire malaise), donc c’est l’affaire de tous de la défendre par un comportement responsable en ligne. Par exemple, vous exprimer sur un forum en agressant un client ou en divulguant des infos non publiques peut nuire à la boîte – donc ayez conscience que même hors de la comm officielle, vos paroles ont un impact (d’où souvent des chartes internes de prise de parole publique pour les employés).}
+\end{frame}
+
+\section{Études de cas (2015--2025)}
+\begin{frame}{Cas 1 : \textbf{Samsung Galaxy Note7} (2016)}
+    \textbf{Contexte :} En 2016, Samsung lance le smartphone Galaxy Note7. Rapidement, des incidents d’explosion de batterie sont signalés dans le monde entier. Samsung initie un rappel global en septembre 2016.
+    \begin{itemize}
+        \item La réaction initiale de Samsung est saluée pour sa rapidité (rappel annoncé quelques jours après les premiers incidents).
+        \item Cependant, la communication manque de clarté sur la cause exacte et le calendrier de remplacement.
+    \end{itemize}
+    \textbf{Actions de com :}
+    \begin{itemize}
+        \item \textbf{Messages officiels :} excuses publiques du président de Samsung Mobile, engagement à la sécurité des clients, promesse de transparence dans l’enquête technique.
+        \item \textbf{Canaux :} vidéos explicatives diffusées, infographies détaillant le plan d’échange, création d’une page web dédiée aux instructions de retour.
+        \item \textbf{Gestion de crise technique :} Deux rappels successifs (le premier lot de remplacement a aussi présenté des défauts) – entraînant l’arrêt total de la production du Note7 en octobre 2016.
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item \textbf{Réputation impactée :} Pertes financières estimées à plus de \$5 milliards. Image de fiabilité de Samsung entachée à court terme.
+        \item \textbf{Retours :} Samsung a finalement publié en janvier 2017 un rapport détaillé sur les causes (erreurs de design batterie et de fabrication) et a mis en place un protocole de test batterie en 8 points pour le futur, dans une démarche de reconquête de confiance.
+        \item \textbf{Leçons :} Transparence technique et prise de responsabilité ont été nécessaires pour regagner la crédibilité. Samsung a été critiqué initialement pour une communication perçue comme hésitante (messages évolutifs, confusion sur la deuxième vague de rappel). Le cas souligne l’importance d’une com de crise claire, consistante et centrée sur la sécurité des utilisateurs.
+    \end{itemize}
+    \note{Le fiasco du Note7 est un cas d’école de crise produit. On voit qu’une réaction rapide est cruciale mais ne suffit pas : il a fallu persévérer dans la transparence (expliquer les causes) pour tourner la page. Samsung a appris et a su redorer son blason en montrant qu’ils prenaient des mesures drastiques pour éviter toute récidive (ce protocole batterie est devenu un argument marketing positif par la suite, “nos batteries sont ultra-testées”). Pour un ingénieur, ce cas montre comment une faille technique peut avoir d’énormes répercussions business et comment la communication doit accompagner la résolution technique (ici double rappel, un vrai cauchemar logistique et d’image).}
+\end{frame}
+
+\begin{frame}{Cas 2 : \textbf{Facebook \& Cambridge Analytica} (2018)}
+    \textbf{Contexte :} En mars 2018, révélations que Cambridge Analytica, une firme liée à des campagnes politiques, a indûment obtenu les données personnelles de jusqu’à 87 millions d’utilisateurs Facebook en exploitant une application tierce.
+    \begin{itemize}
+        \item Crise de confiance majeure envers Facebook quant à la protection des données et l’éthique d’utilisation (interférence électorale, etc.).
+    \end{itemize}
+    \textbf{Communication de Facebook :}
+    \begin{itemize}
+        \item \textbf{Réponse initiale :} Mark Zuckerberg tarde quelques jours à s’exprimer, ce qui lui a été reproché. Quand il le fait, il publie un long post assumant “We have a responsibility to protect your data, and if we can’t, we don’t deserve to serve you.”, admettant des erreurs et promettant des mesures.
+        \item \textbf{Campagne d’excuses :} Insertion de pleines pages de publicité dans journaux (“We’re sorry we didn’t do more at the time. We’re now taking steps to ensure it doesn’t happen again.”).
+        \item \textbf{Mesures annoncées :} audit des applications tierces, restriction des permissions de données, facilité accrue pour les utilisateurs de contrôler leurs données.
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item Zuckerberg témoigne devant le Congrès américain en avril 2018 – exercice de communication sous haute tension retransmis mondialement. Il adopte un ton contrit et favorable à plus de régulation si nécessaire.
+        \item \textbf{Impact réputationnel :} \#DeleteFacebook a tendance un moment sur Twitter, certains utilisateurs quittent la plateforme, action Facebook chute puis se redresse. Sur le long terme, l’image de Facebook en sort ternie en termes de confiance, et cela a ouvert la voie à des réglementations plus strictes (RGPD venait d’entrer en vigueur peu après).
+        \item \textbf{Leçons :} Importance d’une réaction prompte au niveau exécutif lors d’une crise de confiance. La reconnaissance de la faute et l’engagement ferme à changer ont été les seuls messages acceptables pour le public et les autorités dans ce cas. Nier ou minimiser aurait empiré la situation.
+    \end{itemize}
+    \note{Cambridge Analytica est un cas emblématique de crise réputationnelle liée aux données. Pour les ingénieurs, c’est un rappel que des choix techniques (ouvrir trop d’API sans contrôle) peuvent mener à des abus et qu’on en paie ensuite le prix en image et en régulation. Facebook a dû opérer un mea culpa global. D’un point de vue comm, la lenteur initiale de Zuckerberg a été un faux-pas, car “le silence radio” a aggravé la défiance. Ensuite, ils ont fait ce qu’il fallait en termes d’excuses publiques massives et de correctifs. Mais la confiance perdue se regagne difficilement – même aujourd’hui, la réputation de Facebook reste entachée par cette affaire auprès de nombreux utilisateurs.}
+\end{frame}
+
+\begin{frame}{Cas 3 : \textbf{OVHcloud – Incendie datacenter SBG2} (2021)}
+    \textbf{Contexte :} Le 10 mars 2021 vers 00h47, un incendie ravage l’un des datacenters d’OVHcloud à Strasbourg (SBG2) et en affecte un autre (SBG1). Des milliers de serveurs détruits, coupure pour de nombreux sites web clients.
+    \begin{itemize}
+        \item Pas de blessé, mais incident majeur pour le principal hébergeur européen.
+    \end{itemize}
+    \textbf{Communication OVHcloud :}
+    \begin{itemize}
+        \item \textbf{Info en temps réel :} Le fondateur Octave Klaba tweete dès la nuit pour informer de l’incendie et conseiller aux clients d’activer leur PCA (Plan de reprise). Ses tweets réguliers servent de canal direct, transpirant la transparence (“Firefighters were immediately on the scene but could not control the fire”).
+        \item \textbf{Updates multi-canaux :} OVHcloud met en place une page \textit{“Strasbourg incident”} sur son site avec des bulletins quotidiens sur la progression du rétablissement. Conférence de presse tenue dans la semaine.
+        \item \textbf{Empathie client :} Offre de crédit/remboursement pour les clients impactés annoncée rapidement (un mois de service offert). 
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item \textbf{Réputation :} Globalement, la comm d’OVHcloud a été saluée pour sa réactivité et son honnêteté. Les clients ont apprécié d’être informés en continu, même si certains ont souffert de pertes de données (clients sans sauvegardes externes).
+        \item \textbf{Tech \& image :} OVHcloud a publié un rapport d’incident complet quelques semaines plus tard et annoncé des investissements de renforcement (systèmes anti-incendie, etc.). L’image d’OVHcloud comme acteur fiable a certainement pris un coup à court terme, mais la gestion de crise transparente a atténué la défiance. 
+        \item \textbf{Leçons :} Dans un incident technique grave, un dirigeant qui communique directement et fréquemment (via Twitter dans ce cas) aide à garder la confiance. OVHcloud a aussi montré l’utilité d’avoir une stratégie multi-supports (réseaux sociaux, site officiel, support client) intégrée en temps réel.
+    \end{itemize}
+    \note{Ce cas est intéressant car c’est une entreprise tech européenne qui gère un incident très concret (un incendie). Octave Klaba est connu pour son style de communication direct sur Twitter, et cela a été un atout : les clients suivaient presque en live les progrès. Bien sûr, tout le monde n’est pas sur Twitter, donc OVH a du combiner avec des emails et page status. Le fait de ne pas cacher la gravité (“il y a eu un gros incendie”) et de donner des ETA (même si elles ont bougé) a évité les spéculations. Le geste commercial est devenu quasi-obligatoire dans ce genre de cas pour montrer qu’on assume les conséquences. Ce cas montre aussi qu’une bonne communication ne remplace pas la robustesse technique (certains clients ont perdu des données parce qu’ils n’avaient pas de backups multi-site, ce qui a fait polémique). OVHcloud a su transformer la crise en opportunité de se renforcer et de démontrer son sérieux (via le rapport post-incident).}
+\end{frame}
+
+\begin{frame}{Cas 4 : \textbf{Uber – Fuite de données dissimulée} (2016/2017)}
+    \textbf{Contexte :} Fin 2016, Uber subit une fuite massive de données (57 millions d’utilisateurs et chauffeurs). L’entreprise, sous la direction du CEO Travis Kalanick, décide de payer \$100k aux hackeurs pour “détruire les données” et ne pas divulguer l’incident. L’affaire reste cachée pendant un an.
+    \begin{itemize}
+        \item En novembre 2017, le nouveau CEO Dara Khosrowshahi révèle publiquement la fuite suite à un audit. C’est une crise car la dissimulation est très mal perçue (violation de confiance).
+    \end{itemize}
+    \textbf{Communication Uber :}
+    \begin{itemize}
+        \item \textbf{Reconnaissance tardive :} Khosrowshahi publie un communiqué admettant la fuite et admettant que ça n’aurait pas dû arriver ainsi, s’engage à notifier les personnes concernées et régulateurs.
+        \item \textbf{Mesures :} Il annonce le renvoi de deux employés responsables de la gestion de l’incident en 2016 (notamment le Chief Security Officer qui avait orchestré le paiement secret), et la mise en place de nouvelles politiques sécurité.
+        \item \textbf{Régulateurs :} Uber coopère avec les enquêtes des autorités (qui infligeront plus tard des amendes pour non-notification). Dara fait un véritable mea culpa dans les médias, cherchant à tourner la page sur les pratiques opaques de l’ancienne direction.
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item \textbf{Impact image :} Uber était déjà englué dans des scandales (culture toxique, etc.). Cette affaire a renforcé l’idée d’une entreprise peu éthique sous Kalanick. L’arrivée de Khosrowshahi et sa communication transparente visaient à restaurer la confiance, partiellement réussie.
+        \item \textbf{Amendes :} Uber a payé \$148 millions d’accord avec 50 États US pour clôturer l’affaire de cette fuite non divulguée.
+        \item \textbf{Leçons :} Taire une fuite est pire que la fuite elle-même. L’obligation légale (dans de nombreux pays) de notifier n’est qu’une partie – moralement, les utilisateurs attendent honnêteté. Ce cas illustre qu’en communication de crise, la tentative de camouflage peut causer un \textit{backfire} énorme une fois révélée, avec perte durable de réputation.
+    \end{itemize}
+    \note{Pour un ingénieur ou pro de la tech, ce cas Uber est un cas d’école de “ce qu’il ne faut pas faire”. Payer des hackeurs pour silence, c’est à la fois illégal (en tout cas non conforme aux régulations) et contraire à l’éthique. Quand la nouvelle a éclaté, Uber a dû gérer non seulement la crise de sécurité, mais aussi la crise de confiance liée à la dissimulation. Le nouveau CEO a bien géré en sacrifiant les responsables et en communiquant largement sur la volonté de changement. Mais la morale, c’est que la transparence initiale aurait évité bien des déboires. On peut comparer à une autre fuite (par ex. Equifax 2017) où la communication n’a pas été optimale non plus. De plus en plus, les lois comme le RGPD rendent cette question simple : on doit notifier. Donc du point de vue com, la question ne se pose plus - il faut communiquer, alors autant le faire bien et vite.}
+\end{frame}
+
+\begin{frame}{Cas 5 : \textbf{Cloudflare – Panne mondiale} (2019)}
+    \textbf{Contexte :} Le 2 juillet 2019, Cloudflare (fournisseur CDN et DNS) subit une panne globale d’environ 30 minutes causée par une mauvaise règle firewall déployée. Un grand nombre de sites web à travers le monde deviennent inaccessibles (erreur 502).
+    \begin{itemize}
+        \item Impact relativement court mais très visible (de nombreux utilisateurs finaux constatent l’erreur en même temps).
+    \end{itemize}
+    \textbf{Communication Cloudflare :}
+    \begin{itemize}
+        \item \textbf{Rapidité :} Cloudflare poste dans l’heure un tweet reconnaissant le problème et confirmant qu’ils travaillent à la résolution.
+        \item \textbf{Post-mortem détaillé :} Quelques heures plus tard, la société publie un billet de blog technique approfondi expliquant la cause (une regex mal conçue dans WAF), assumant l’erreur humaine, fournissant les graphiques de trafic montrant l’incident, et détaillant les mesures prises pour éviter que cela ne se reproduise (process de déploiement amélioré, tests regex supplémentaires, etc.).
+        \item \textbf{Ton :} Transparent et humble. Le titre du blogpost est même légèrement auto-critique (“$[Cloudflare outage]$: How regex brought down the Internet”). Ils ont traité l’incident avec transparence envers leur communauté tech, transformant une erreur en leçon partagée.
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item La communauté technique a salué la réactivité et la sincérité de Cloudflare. Le post-mortem a été largement partagé comme exemple de bonne pratique SRE.
+        \item \textbf{Réputation :} Aucune perte significative de clients n’a été reportée suite à cette panne isolée. Au contraire, la façon de communiquer a renforcé la confiance de certains (mieux vaut un fournisseur qui admet et corrige ses erreurs qu’un qui les cache).
+        \item \textbf{Leçons :} Ce cas montre la valeur d’une communication technique transparente adaptée à l’audience (leurs clients sont pour beaucoup des ingénieurs ou webmasters). En fournissant toutes les données post-incident, Cloudflare a transformé un moment négatif en opportunité d’éducation et de renforcement de sa crédibilité technique.
+    \end{itemize}
+    \note{Cloudflare est souvent cité dans la communauté devops pour la qualité de ses post-mortems publics. Ils suivent en cela la philosophie SRE de Google où le blameless post-mortem est courant en interne – Cloudflare le fait en externe. En plus d’apaiser les clients en leur montrant qu’ils savent précisément ce qu’il s’est passé et comment le régler, ces publications positionnent Cloudflare en leader transparent et compétent. Pour un ingénieur, c’est un bon modèle : si votre entreprise vit un incident, militez pour qu’un retour d’expérience soit communiqué (bien sûr avec l’aval de la comm). C’est gagnant sur le long terme. On voit que malgrè la forte incidence (tout un paquet du net down), leur communication a été si bonne qu’elle a quasi effacé la bourde initiale.}
+\end{frame}
+
+\begin{frame}{Cas 6 : \textbf{Microsoft Tay – L’IA devenue toxique} (2016)}
+    \textbf{Contexte :} En mars 2016, Microsoft lance “Tay”, une intelligence artificielle conversationnelle sur Twitter, censée apprendre des interactions avec les internautes. En moins de 24h, Tay commence à publier des tweets à caractère raciste et conspirationniste, influencée par des utilisateurs malintentionnés.
+    \begin{itemize}
+        \item Microsoft retire Tay en urgence après seulement 16h d’activité, face à la dégradation complète du discours de l’IA.
+    \end{itemize}
+    \textbf{Communication Microsoft :}
+    \begin{itemize}
+        \item \textbf{Réaction initiale :} Silence pendant environ un jour, le temps de comprendre en interne ce qui s’est passé. Puis un communiqué officiel est publié s’excusant pour les tweets offensants et indiquant la mise hors ligne de Tay pour modifications.
+        \item \textbf{Explication :} Quelques jours plus tard, une responsable de Microsoft AI écrit un post de blog analysant l’incident : elle admet que l’équipe n’avait pas anticipé ce type d’”attaques” coordinées exploitant les vulnérabilités de l’apprentissage de Tay. Elle réaffirme l’engagement de Microsoft à l’IA responsable et la pause dans le déploiement de Tay jusqu’à solution.
+        \item \textbf{Ton :} Mea culpa technique. Microsoft évite de blâmer les utilisateurs et prend la responsabilité de ne pas avoir assez bridé les possibilités de dérapage.
+    \end{itemize}
+    \textbf{Résultats :}
+    \begin{itemize}
+        \item L’affaire a fait les choux gras de la presse tech et généraliste, alimentant les craintes sur l’IA. Microsoft a préféré mettre en veille le projet Tay (qui n’est jamais revenu tel quel).
+        \item \textbf{Image :} Microsoft s’en est sorti sans trop de casse sur sa marque, l’erreur étant perçue comme expérimentale. Cependant, cela a servi de leçon dans l’industrie sur l’importance d’éthiques et garde-fous dans les IA grand public.
+        \item \textbf{Leçons :} En communication de crise tech, si le produit lui-même tient des propos injurieux, l’entreprise doit s’excuser comme si c’était elle – car c’est de sa responsabilité. Microsoft a fait ce qu’il fallait en retirant immédiatement l’IA et en communiquant sobrement sur l’incident, sans chercher à défendre l’indéfendable.
+    \end{itemize}
+    \note{Le cas Tay montre un type de crise très propre à l’ère de l’IA : l’outil dérape de façon imprévisible. La leçon pour la comm est double : d’une part, le retrait immédiat du produit (pas chercher à le laisser en ligne en espérant que ça se calme) car chaque minute de plus = plus de captures d’écran ignobles qui circulent. D’autre part, sur le discours, Microsoft a pris la route de l’humilité scientifique (“c’était une expérimentation, on a appris de nos erreurs”). Ils n’ont pas trop subit sur leur image parce qu’ils ont été assez transparents. Et aussi peut-être parce que ce n’était qu’un chatbot “fun”, pas un service critique comme une fuite de données. Néanmoins, c’est un exemple d’échec public dont il faut tirer de l’expérience : Google et OpenAI par ex. ont retardé ou calibré différemment leurs bots (et pourtant incidents de style different existent, pensons à GPT qui peut sortir des choses fausses ou sensibles).}
+\end{frame}
+
+\begin{frame}{Ce que doit savoir un·e ingénieur·e (Section 9)}
+    \begin{block}{En résumé}
+    \begin{itemize}
+        \item Les cas réels illustrent comment la théorie se traduit en pratique. On voit que \textbf{chaque crise ou événement majeur} a nécessité une adaptation de la communication, mais certains principes sont constants : réagir vite, être franc, montrer l’action corrective.
+        \item \textbf{Le coût d’une mauvaise communication :} Uber a subi un coût en réputation et en prix réel pour avoir caché un incident. À l’inverse, Cloudflare a renforcé sa relation clients par une communication exemplaire après panne. La com n’est pas “superficielle” – elle peut aggraver ou atténuer fortement l’impact d’un événement.
+        \item \textbf{Dimension technique de la com :} Dans tous ces cas, les ingénieurs ont dû collaborer étroitement avec les communicants. Par exemple, analyser et expliquer la cause d’une panne (Cloudflare), sécuriser la diffusion d’un correctif (Samsung), mettre en place des pages web spécifiques pour informer (OVHcloud). La réussite de la communication dépend aussi de ces \textit{back-end} techniques.
+        \item \textbf{Culture d’entreprise :} Des crises comme Cambridge Analytica ou Uber reflètent un problème de culture interne quant à l’éthique. En tant qu’ingénieur, participer à une culture de transparence et de respect des utilisateurs (données, sécurité) est la meilleure prévention de ce genre de crises.
+        \item \textbf{Apprentissage :} Enfin, chaque cas a apporté des \textit{retours d’expérience} précieux. Les entreprises partagent parfois publiquement ces leçons (post-mortems, rapports) – c’est une mine d’or pour quiconque veut apprendre à mieux gérer communication et technique en situation critique.
+    \end{itemize}
+    \end{block}
+    \note{En parcourant ces cas, on espère que vous, futurs ingénieurs, retenez des “patterns” de bonnes et mauvaises pratiques. Il ne s’agit pas de blâmer tel ou tel (facile après coup) mais de voir concrètement : \textit{ne pas mentir, ne pas tarder, expliquer avec pédagogie, assumer la responsabilité, respecter les personnes affectées}. Voyez aussi que souvent la résolution technique et la communication marchent main dans la main – l’une sans l’autre, la crise n’est pas vraiment résolue aux yeux du public. N’hésitez pas à vous intéresser aux post-mortems publics et aux analyses de crises même en dehors de ce cours, car cela vous fera mûrir votre propre approche quand, un jour, c’est vous qui serez aux manettes d’un système en panne ou d’une innovation potentiellement controversée.}
+\end{frame}
+
+\section{Ateliers \& exercices}
+\begin{frame}{Atelier 1 : Rédiger un communiqué de presse}
+    \textbf{Contexte :} Votre entreprise (fictive) “DataSecureX” vient de développer une nouvelle solution de chiffrement ultra-rapide pour les bases de données. Il s’agit de communiquer cette annonce à la presse tech.
+    \begin{itemize}
+        \item Publics visés : journalistes IT sécurité, blogs tech, éventuellement presse économique.
+    \end{itemize}
+    \textbf{Exercice :} Rédigez le communiqué de presse d’une page annonçant cette innovation.
+    \begin{itemize}
+        \item Structure attendue :
+        \begin{itemize}
+            \item \textit{Titre accrocheur} (mettant en avant l’innovation et son bénéfice).
+            \item \textit{Chapeau} (résumé en 2-3 phrases de l’info principale).
+            \item \textit{Corps} : paragraphe 1 – l’annonce (quoi, qui, quand où); paragraphe 2 – le contexte/problème que ça résout; paragraphe 3 – une citation d’un dirigeant de DataSecureX; paragraphe 4 – quelques infos techniques clés et ce que cela implique pour les clients.
+            \item \textit{Boilerplate} sur DataSecureX (2-3 lignes sur l’entreprise).
+            \item \textit{Contact presse} fictif.
+        \end{itemize}
+        \item \textbf{Note :} Adoptez un ton informatif, neutre, évitez le jargon inutile mais mentionnez les éléments techniques marquants (chiffres de performance, comparatifs).
+    \end{itemize}
+    \textbf{Timing :} 30 minutes. Travail en binômes possible. Nous ferons ensuite une lecture critique des drafts.
+    \note{Cet atelier vous plonge dans l’exercice de style du communiqué. C’est très structuré comme format, ce qui rassure beaucoup d’ingénieurs car c’est comme un template. Ne tombez pas dans l’hyperbole marketing – gardez un style factuel, c’est ce qu’apprécient les journalistes tech. Pensez à inclure une citation (c’est toujours utile car les médias aiment avoir un élément humain à reprendre). Après la rédaction, en relecture on vérifiera : est-ce que le message clé ressort dès le titre/chapeau ? Est-ce que c’est compréhensible par un journaliste qui n’a pas 3h pour décoder des détails ? Cet exercice vous fera aussi réfléchir à comment condenser un propos technique en une page claire.}
+\end{frame}
+
+\begin{frame}{Atelier 2 : Bâtir un mini-plan de communication}
+    \textbf{Scenario :} Vous êtes en charge de la communication externe pour le lancement d’une nouvelle application mobile de votre entreprise “GreenRide”, une app de covoiturage écologique à destination des campus universitaires. Lancement prévu dans 3 mois, sur Paris puis d’autres villes.
+    \begin{itemize}
+        \item Contraintes : budget modeste, cible principale 18-25 ans, présence concurrentielle de géants (BlaBlaCar, etc.).
+    \end{itemize}
+    \textbf{Exercice :} Élaborer un plan de communication (synthétique) pour soutenir ce lancement.
+    \begin{itemize}
+        \item À définir : 
+        \begin{itemize}
+            \item 2–3 objectifs de communication (ex: notoriété X pourcent chez étudiants Paris).
+            \item Segments cibles principaux.
+            \item Messages clés (ex: économique, écologique, convivial – à affiner).
+            \item Canaux et actions : choisissez pour le budget ~3 canaux prioritaires (ex: réseaux sociaux TikTok/Instagram avec campagne d’influence micro, affiche campus, événement de lancement style flashmob vert, partenariat avec BDE etc.).
+            \item Un calendrier simplifié sur les 3 mois (teasing, annonce officielle, relances).
+            \item Indicateurs pour mesurer succès (ex: inscriptions app, mentions sur réseaux, reprise presse locale).
+        \end{itemize}
+        \item Document attendu : un tableau ou bullet points par section (objectifs, cibles, messages, actions, calendrier, KPIs).
+    \end{itemize}
+    \textbf{Discussion :} Chaque groupe présente sa stratégie en 5 min, puis feedback du formateur.
+    \note{Ici, l’idée est de mettre en pratique la réflexion stratégique en équipe. Vous devez penser comme un chef de projet comm : comment faire connaître votre appli GreenRide aux étudiants, sans gros moyens, face à du gros concurrent. On veut voir que vous appliquez le modèle : un ou deux messages clairs (ex: “GreenRide – bougez vert, bougez moins cher”), des cibles précises (étudiants mais peut-être aussi asso écolos sur campus), et des actions cohérentes (pas la peine de faire du LinkedIn pour du 18-25 campus; par contre un challenge TikTok ou du street marketing sur le campus oui). Pensez aussi partenariat potentiels (ex: un influenceur étudiant connu sur YouTube ou un groupe Facebook local). N’oubliez pas de mesurer (ex: vouloir 5000 téléchargements le premier mois, etc.). L’exercice entraînera votre créativité tout en respectant une méthodo.}
+\end{frame}
+
+\begin{frame}{Atelier 3 : Simulation de crise}
+    \textbf{Situation :} Il est 10h un lundi. Votre startup IoT “HomeSafe” (caméras de surveillance connectées) apprend via un article de presse que sa base de données clients (y compris des vidéos d’enregistrement) a fuité et se retrouve partiellement en ligne sur un forum. L’article est déjà repris sur les réseaux, des clients commencent à tweeter leur inquiétude.
+    \begin{itemize}
+        \item Vous faites partie de la cellule de crise. On vous laisse 15 minutes (accélération temporelle) pour définir la communication immédiate.
+    \end{itemize}
+    \textbf{Tâches :}
+    \begin{enumerate}
+        \item Rédiger un tweet de réaction initiale (pour le compte officiel @HomeSafe) – 280 caractères max, ton approprié.
+        \item Ébaucher le message email qui sera envoyé aux clients dans les prochaines heures (points à aborder : reconnaissance de l’incident, conseils/actions aux clients, assurance sur ce qui est fait).
+        \item Lister 3 questions difficiles que les journalistes vont certainement poser, et formuler pour chacune un élément de réponse (Q\&A).
+    \end{enumerate}
+    \textbf{Rôle-play :} Un porte-parole du groupe présentera le tweet et les grandes lignes de l’email. L’enseignant fera le “journaliste” en posant les 3 questions pour tester vos réponses.
+    \note{Cet atelier met en situation de stress (fictif). L’objectif est de vous faire réfléchir vite et bien : quel message clé sur Twitter pour gagner du temps et montrer qu’on ne se terre pas ? Qu’écrire dans l’email – ici RGPD oblige à notifier, donc on le fait en plus du tweet. Et anticiper les questions : par ex “Combien de clients touchés ?”, “Comment a-t-on pu laisser faire ?”, “Que dites-vous à ceux qui craignent pour leur vie privée ?”. J’évaluerai la pertinence et la tonalité : on veut empathie, responsabilité, pas de déni. L’exercice vous fait toucher du doigt la coordination entre tech (arrêter la fuite, sécuriser) et comm (communiquer). Ici on se focalise sur la comm. Ce sera sans doute un exercice marquant où l’on voit que sous pression il vaut mieux avoir des plans préconçus!}
+\end{frame}
+
+\begin{frame}{Atelier 4 : Mesurer une campagne (dashboard)}
+    \textbf{Contexte :} Une campagne de communication externe vient de se terminer. Elle comportait :
+    \begin{itemize}
+        \item Une série de 3 vidéos YouTube pédagogiques publiées sur 2 mois.
+        \item Une campagne publicitaire sur LinkedIn ciblant des décideurs (3 annonces différentes).
+        \item Un webinar final en direct.
+    \end{itemize}
+    On veut présenter un \textbf{tableau de bord} au comité de direction résumant les performances.
+    \textbf{Données disponibles (fictives) :}
+    \begin{itemize}
+        \item YouTube : vidéo1 (10k vues, taux d’engagement 5\%), vidéo2 (8k vues, engag. 6\%), vidéo3 (12k vues, engag. 4\%).
+        \item LinkedIn Ads : 100k impressions, 2k clics (taux clic 2\%), conversion en lead sur site derrière 50 leads, budget dépensé 5k€ (coût par lead = 100€).
+        \item Webinar : 300 inscrits, 200 participants effectifs, 40 demandes de contact commercial suite au webinaire.
+        \item Global : sur la période, +20\% de trafic site web vs période précédente, et passage de 10 à 15 demandes entrantes/mois en moyenne.
+    \end{itemize}
+    \textbf{Exercice :} Concevez un \underline{slide de dashboard} présentable (structure + chiffres clés, avec éventuellement un petit graphique ou icônes). Mettez en évidence 4–5 indicateurs phare que vous commenteriez.
+    \begin{itemize}
+        \item Puis, formulez une recommandation en une phrase : au vu de ces chiffres, doit-on reconduire ou ajuster la campagne ?
+    \end{itemize}
+    \textbf{Restitution :} Chaque participant affiche son “dashboard” succinct et explique son choix d’indicateurs.
+    % \note{Dernier atelier orienté mesure. Le but est de traduire plein de chiffres en quelques KPI compréhensibles. Le comité de direction ne veut pas tous les détails, il veut savoir : est-ce que la campagne a fait bouger l’aiguille ?\ Montrez par ex que les leads et demandes ont augmenté de X\%.\ Montrez le ROI approximatif (on a dépensé 5k€ sur LinkedIn, on a 50 leads, on sait qu’historiquement 1 lead sur 5 se transforme en client moyen 10k€, donc 50 leads -> 10 clients potentiels * 10k = 100k pipeline pour 5k dépensés, ratio intéressant...).\ Chacun aura sa manière. L’important est de choisir des visualisations claires : par ex une flèche verte “+20% trafic”, un petit bar chart comparant vues YouTube vs engagement. Ce sera intéressant de voir comment vous priorisez l’info, c’est un travail de synthèse.}
+\end{frame}
+
+\section{Projet final}
+\begin{frame}{Projet final : Plan de com’ externe complet}
+    \textbf{Brief :} Par groupes de 4-5, vous agirez comme une agence conseil en communication. Une entreprise technologique fictive “SmartHealth” (spécialisée en e-santé, applications de télémédecine) souhaite refondre sa communication externe sur l’année à venir.
+    \begin{itemize}
+        \item Problématiques : manque de notoriété grand public, besoin de crédibiliser ses solutions auprès du corps médical, et de rassurer sur la confidentialité des données de santé.
+    \end{itemize}
+    \textbf{Livrables du projet (à remettre dans 4 semaines) :}
+    \begin{enumerate}
+        \item \textbf{Dossier stratégique (10-15 pages)} comprenant :
+        \begin{itemize}
+            \item Analyse synthétique de l’existant (image actuelle de SmartHealth, concurrents, tendances).
+            \item Positionnement et messages clés recommandés.
+            \item Plan de communication externe sur 12 mois : publics cibles, objectifs, axes créatifs, calendrier d’actions, budget indicatif alloué par canal.
+            \item Un protocole de gestion de crise spécifique (par ex: en cas de faille de sécurité sur données patients – prévoir comment l’entreprise communiquerait).
+            \item Indicateurs de performance clés et mode de suivi (tableau de bord trimestriel conceptuel).
+        \end{itemize}
+        \item \textbf{Kit RP :} Communiqué de presse + modèle de pitch email pour journalistes pour le lancement d’une nouvelle offre phare de SmartHealth (au choix du groupe, ex: appli de suivi COVID).
+        \item \textbf{Présentation orale (15 min)} : chaque groupe exposera les points saillants du plan et défendra ses choix devant un “jury” (enseignant + éventuellement professionnel invité).
+    \end{enumerate}
+    \textbf{Évaluation :} sur la qualité de l’analyse, la créativité des propositions, la cohérence globale et la faisabilité. Toutes les notions vues en cours sont mobilisables.
+    \note{Le projet final est l’aboutissement pratique de ce cours. Vous allez mettre tout ensemble : analyse, stratégie, outils RP, gestion de crise, mesure. Mettez-vous en situation réelle : proposez des idées originales mais adaptées (ex: campagne de com avec tel influenceur santé, partenariat avec hôpitaux pour études de cas, campagne grand public sur la prévention...). N’oubliez pas l’aspect éthique (données de santé sensibles). Ce sera noté non seulement sur le document écrit mais aussi sur comment vous le présentez oralement : vous devez convaincre que votre plan va booster la com de SmartHealth. Bon travail en équipe, et n’hésitez pas à me solliciter en encadrement pour valider certaines directions.}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Conclusion \& perspectives}
+    \begin{itemize}
+        \item La communication externe est un exercice équilibrant stratégie planifiée et adaptation en temps réel (notamment à l’ère digitale). Pour un ingénieur informatique, y être sensibilisé permet de mieux aligner son travail technique avec la mise en valeur et la protection de l’entreprise.
+        \item Nous avons parcouru les bases : de l’établissement des objectifs, jusqu’aux retours d’expérience post-campagnes et post-crises. Vous êtes maintenant armés pour contribuer activement aux efforts de communication dans vos futurs projets.
+        \item \textbf{Tendance futures :} 
+        \begin{itemize}
+            \item Le rôle de l’IA dans la communication (chatbots de plus en plus sophistiqués, mais aussi nécessité d’esprit critique face à la désinformation).
+            \item La communication durable et responsable : intégration plus poussée des enjeux RSE, transparence environnementale (éviter le \textit{greenwashing}, communiquer des données d’impact de façon honnête).
+            \item L’expérience communautaire : les entreprises tech créent davantage de communautés d’utilisateurs (forums, Discord) – la frontière entre clients, ambassadeurs et médias s’estompe. Cela requerra des compétences à la fois techniques et communicationnelles pour animer ces communautés.
+        \end{itemize}
+        \item \textbf{En synthèse, l’ingénieur communicant :} maîtriser son sujet technique, savoir le vulgariser, comprendre l’attente de l’audience, respecter l’éthique et mesurer l’impact – voilà le profil idéal qui apportera une forte valeur ajoutée dans les organisations innovantes.
+    \end{itemize}
+    \note{En conclusion, j’espère que vous avez pris conscience que la communication externe n’est pas un “mal nécessaire” ou un vernis superficiel, mais un prolongement de la qualité de vos produits et de votre entreprise. Une bonne technologie sans bonne communication peut passer inaperçue; une mauvaise technologie avec une super com… fera peut-être un buzz mais sera tôt ou tard rattrapée par la réalité. Donc l’idéal est d’exceller dans les deux. En tant qu’ingénieurs, vous avez la crédibilité technique – en y ajoutant ces compétences de communication, vous deviendrez d’excellents ambassadeurs. Sur ce, je vous remercie de votre attention tout au long du cours. Bonne chance pour le projet final et pour mettre en pratique ces notions dans vos carrières !}
+\end{frame}
+
+\appendix
+\begin{frame}[allowframebreaks]{Glossaire}
+    \begin{description}
+        \item[AMEC:] Association for Measurement and Evaluation of Communication – organisme international promouvant les bonnes pratiques de mesure des RP (cadre intégré).
+        \item[Attaché(e) de presse:] Chargé(e) des relations médias au sein d’une organisation, fait le lien avec les journalistes (communiqués, organisation d’interviews).
+        \item[Branding:] Ensemble des actions visant à construire et gérer la marque (identité, image, messages).
+        \item[Crise de communication:] Situation où l’entreprise doit communiquer en urgence sur un événement menaçant sa réputation ou son activité (accident, scandale, etc.).
+        \item[KPI:] Key Performance Indicator (Indicateur Clé de Performance) – métrique quantifiable utilisée pour évaluer le succès d’une action ou d’une campagne vis-à-vis des objectifs.
+        \item[PESO:] Paid, Earned, Shared, Owned media – classification des types de canaux de communication (payés, acquis, partagés, propres).
+        \item[RGPD:] Règlement Général sur la Protection des Données (EU 2016/679) – cadre légal européen sur la vie privée et la protection des données personnelles.
+        \item[Réseaux sociaux:] Plateformes en ligne de communication communautaire (Twitter, LinkedIn, Facebook, Instagram, etc.) utilisées par les entreprises pour engager la conversation avec leurs audiences.
+        \item[RSE:] Responsabilité Sociétale de l’Entreprise – prise en compte par l’entreprise des impacts sociaux, éthiques et environnementaux de ses activités (et communication associée sur ces sujets).
+        \item[Swot / Pestel:] Outils d’analyse stratégique. SWOT: Forces, Faiblesses, Opportunités, Menaces. PESTEL: analyse de l’environnement macro (Politique, Économique, Social, Technologique, Écologique, Légal).
+    \end{description}
+\end{frame}
+
+\begin{frame}{Bibliographie}
+    \printbibliography[heading=none]
+\end{frame}
+
+\end{document}
